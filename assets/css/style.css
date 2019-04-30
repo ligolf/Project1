@@ -25,6 +25,11 @@
   /* margin-bottom: 5px; */
 }
 
+/* Card Margin */
+.card {
+  margin-bottom: 10px;
+}
+
 .event-date,
 .time {
   float: right;
@@ -65,4 +70,35 @@
 
 .event-card-header {
   background-color: darkslategrey;
+}
+
+/*Media Query for screen under 500px*/
+@media only screen and (max-width: 500px) {
+  .btn-success {
+    font-size: 19px;
+    font-weight: 500;
+    width: 50%;
+    margin: auto;
+  }
+
+  .event-date,
+  .time {
+    float: right;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 10px;
+    color: #ffffff;
+    margin-right: 20px;
+    border-right: 2px solid rgb(71, 174, 221);
+    padding-right: 20px;
+    padding-top: 2px;
+  }
+
+  .dollar-cost {
+    float: right;
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    color: gold;
+  }
 }
