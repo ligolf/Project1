@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <!-- <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+    /> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <!-- Firebase Reference -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase.js"></script> -->
+
+    <!-- Moment.js Reference -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script> -->
+    <style>
+      .mapimage {
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <!-- Sign-Up Card-->
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header map-header">
+              Drunkin Screw Locations
+            </div>
+            <div class="card-body">
+              <div class="map-holder">
+                <img
+                  src="assets/images/map.png"
+                  alt="location map"
+                  class="mapimage"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <div class="create-button-holder">
+            <div class="create-event-button">
+              <button
+                type="button"
+                class="btn btn-success center-block"
+                data-toggle="modal"
+                data-target="#create-event"
+              >
+                Click Here To Create An Event
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="card rounded">
+            <div class="card-header event-card-header">
+              <!-- <button type="button" class="btn btn-info" id="event-join">Join</button>
+                  <div class="dollar-cost">$ $ $ $ $</div> -->
+              <button type="button" class="btn btn-info" id="event-join">
+                Join
+              </button>
+              <div class="dollar-cost" id="event-cost">$ $ $ $ $</div>
+              <div class="time" id="event-time">6:30 pm</div>
+              <div class="event-date" id="event-date">4/27</div>
+            </div>
+
+            <ul class="list-group list-group-flush">
+              <li
+                class="list-group-item list-group-item-success"
+                id="creator-name"
+              >
+                <strong>Creator: </strong>Malcom Doe
+              </li>
+              <li class="list-group-item" id="event-address">
+                <strong>Address: </strong>1234 Westwood Bl, Westwood, CA 90004
+              </li>
+              <li class="list-group-item" id="event-description">
+                <strong>Description: </strong>Mix and match multiple content
+                types to create the card you need, or throw everything in there.
+                Shown below are image styles, blocks, text styles, and a list
+                group—all wrapped in a fixed-width card.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card rounded">
+            <div class="card-header event-card-header">
+              <!-- <button type="button" class="btn btn-info" id="event-join">Join</button>
+                    <div class="dollar-cost">$ $ $ $ $</div> -->
+              <button type="button" class="btn btn-info" id="event-join">
+                Join
+              </button>
+              <div class="dollar-cost" id="event-cost">$ $ $ $ $</div>
+              <div class="time" id="event-time">6:30 pm</div>
+              <div class="event-date" id="event-date">4/27</div>
+            </div>
+
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="creator-name">
+                Creator: Marry Jane
+              </li>
+              <li class="list-group-item" id="event-address">
+                Address: 2222 Westwood Bl, Westwood, CA 90004
+              </li>
+              <li class="list-group-item" id="event-description">
+                Description: Mix and match multiple content types to create the
+                card you need, or throw everything in there.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="footer">
+      <p>Footer</p>
+    </div>
+    <link type="text/css" rel="stylesheet" href="assets/css/style.css" />
+  </body>
+</html>
+
+<div class="event-card-holder"></div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="create-event" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Create an Event</h4>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <form role="form">
+            <div class="form-group row">
+              <label for="creator-name">Name:</label>
+              <input class="form-control" id="creator-name" type="text" />
+            </div>
+            <div class="form-group row">
+              <label for="event-cost">Cost: </label>
+              <p>
+                <select id="event-cost">
+                  <option value="5">$5</option>
+                  <option value="10">$10</option>
+                  <option value="20">$20</option>
+                  <option value="30">$30</option>
+                  <option value="40">$40</option>
+                  <option value="50">$50</option>
+                  <option value="75">$75</option>
+                  <option value="100">$100</option>
+                  <option value="100+">$100+</option>
+                </select>
+              </p>
+              <!-- <input class="form-control" id="event-cost" type="cost"> -->
+            </div>
+            <div class="form-group row">
+              <label for="event-date">Date:</label>
+              <input class="form-control" id="event-date" type="date" />
+              <label for="event-time">Time:</label>
+              <input class="form-control" id="event-time" type="time" />
+            </div>
+            <div class="form-group row">
+              <label for="event-address">Address:</label>
+              <input class="form-control" id="event-address" type="address" />
+            </div>
+            <div class="form-group row">
+              <label for="event-description">Description?</label>
+              <textarea
+                class="form-control"
+                id="event-description"
+                rows="2"
+              ></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            Create Event
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
