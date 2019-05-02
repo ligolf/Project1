@@ -29,7 +29,7 @@ $("#create-event").on("click", function (event) {
   var eventdescription = $("#event-description-input")
     .val()
     .trim();
-  var eventCost = $("#git -input")
+  var eventCost = $("#event-cost-input")
     .val()
     .trim();
   var eventDate = moment(
@@ -63,45 +63,93 @@ $("#create-event").on("click", function (event) {
 
   // Clears all of the text-boxes
   $("#creator-name-input").val("");
-  $("event-address-input").val("");
+  $("#event-address-input").val("");
   $("#event-date-input").val("");
   $("#event-time-input").val("");
   $("#event-cost-input").val("");
   $("#event-description-input").val("");
+
+
+  // 3. Create Firebase event for pulling events from the database and a row in the html when a user adds an entry
+  database.ref().on("child_added", function (childSnapshot) {
+    console.log(childSnapshot.val());
+
+    // Store everything into a variable.
+    var creatorName = childSnapshot.val().name;
+    var eventAddress = childSnapshot.val().address;
+    var eventTime = childSnapshot.val().time;
+    var eventdescription = childSnapshot.val().description;
+    var eventCost = childSnapshot.val().cost;
+    var eventDate = childSnapshot.val().date;
+
+    // event Info
+    console.log(creatorName);
+    console.log(eventAddress);
+    console.log(eventTime);
+    console.log(eventdescription);
+    console.log(eventCost);
+    console.log(eventDate);
+  });
+
 });
 
-// 3. Create Firebase event for pulling events from the database and a row in the html when a user adds an entry
-database.ref().on("child_added", function (childSnapshot) {
-  console.log(childSnapshot.val());
+$("#join-event").on("click", function (event) {
+  event.preventDefault();
 
-  // Store everything into a variable.
-  var creatorName = childSnapshot.val().name;
-  var eventAddress = childSnapshot.val().address;
-  var eventTime = childSnapshot.val().time;
-  var eventdescription = childSnapshot.val().description;
-  var eventCost = childSnapshot.val().cost;
-  var eventDate = childSnapshot.val().date;
+  // Grabs user input
+  var attendeeName = $("#attendee-name-input")
+    .val()
+    .trim();
+  var attendeeEmailAddress = $("#attendee-email-input")
+    .val()
+    .trim();
 
-  // event Info
-  console.log(creatorName);
-  console.log(eventAddress);
-  console.log(eventTime);
-  console.log(eventdescription);
-  console.log(eventCost);
-  console.log(eventDate);
+  // Creates local "temporary" object for holding event data
+  var newEvent = {
+    attendeeName: attendeeName,
+    attendeeEmailAddress: attendeeEmailAddress,
+  };
 
-  // Create the new row
-  var newRow = $("<tr>").append(
-    $("<td>").text(creatorName),
-    $("<td>").text(eventAddress),
-    $("<td>").text(eventTime),
-    $("<td>").text(eventdescription),
-    $("<td>").text(eventCost),
-    $("<td>").text(eventDate)
-  );
+  // Uploads event data to the database
+  database.ref().push(newEvent);
 
+  // Logs everything to console
+  console.log(newEvent.attendeeName);
+  console.log(newEvent.attendeeEmailAddress);
+  console.log("Join successfully added");
+
+  // Clears all of the text-boxes
+  $("#attendee-name-input").val("");
+  $("#attendee-email-input").val("");
 
 
-  // Append the new row to the table
-  $("#event-table > tbody").append(newRow);
+  // 3. Create Firebase event for pulling events from the database and a row in the html when a user adds an entry
+  database.ref().on("child_added", function (childSnapshot) {
+    console.log(childSnapshot.val());
+
+    // Store everything into a variable.
+    var attendeeName = childSnapshot.val().attendeeName;
+    var attendeeEmailAddress = childSnapshot.val().attendeeEmailAddress;
+
+
+    // event Info
+    console.log(attendeeName);
+    console.log(attendeeEmailAddress);
+
+
+
+    // Create the new row
+    // var newRow = $("<tr>").append(
+    //   $("<td>").text(attendeeName),
+    //   $("<td>").text(attendeeEmailAddress),
+
+    // Append the new row to the table
+    // $("#event-table > tbody").append(newRow);
+
+    // )
+  });
 });
+
+
+
+
