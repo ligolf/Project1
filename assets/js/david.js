@@ -17,23 +17,23 @@ $("#create-event").on("click", function (event) {
   event.preventDefault();
 
   // Grabs user input
-  var creatorName = $("#creator-name")
+  var creatorName = $("#creator-name-input")
     .val()
     .trim();
-  var eventAddress = $("#event-address")
+  var eventAddress = $("#event-address-input")
     .val()
     .trim();
-  var eventTime = $("#event-time")
+  var eventTime = $("#event-time-input")
     .val()
     .trim();
-  var eventdescription = $("#event-description")
+  var eventdescription = $("#event-description-input")
     .val()
     .trim();
-  var eventCost = $("#event-cost")
+  var eventCost = $("#git -input")
     .val()
     .trim();
   var eventDate = moment(
-    $("#event-date")
+    $("#event-date-input")
       .val()
       .trim(),
     "MM/DD/YYYY"
@@ -62,12 +62,12 @@ $("#create-event").on("click", function (event) {
   console.log("event successfully added");
 
   // Clears all of the text-boxes
-  $("#creator-name").val("");
-  $("event-address").val("");
-  $("#event-date").val("");
-  $("#event-time").val("");
-  $("#event-cost").val("");
-  $("#event-description").val("");
+  $("#creator-name-input").val("");
+  $("event-address-input").val("");
+  $("#event-date-input").val("");
+  $("#event-time-input").val("");
+  $("#event-cost-input").val("");
+  $("#event-description-input").val("");
 });
 
 // 3. Create Firebase event for pulling events from the database and a row in the html when a user adds an entry

@@ -49,7 +49,8 @@
       <div class="col-lg-12 text-center">
         <div class="create-button-holder">
           <div class="create-event-button">
-            <button type="button" class="btn btn-success center-block" data-toggle="modal" data-target="#create-event">
+            <button type="button" class="btn btn-success center-block" data-toggle="modal"
+              data-target="#create-event-index">
               Click Here To Create An Event
             </button>
           </div>
@@ -67,9 +68,9 @@
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#event-join">
               Join
             </button>
-            <div class="dollar-cost" id="event-cost">$ $ $ $ $</div>
-            <div class="time" id="event-time">6:30 pm</div>
-            <div class="event-date" id="event-date">4/27</div>
+            <div class="dollar-cost" id="event-cost1">$ $ $ $ $</div>
+            <div class="time" id="event-time1">6:30 pm</div>
+            <div class="event-date" id="event-date1">4/27</div>
           </div>
 
           <ul class="list-group list-group-flush">
@@ -94,9 +95,9 @@
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#event-join">
               Join
             </button>
-            <div class="dollar-cost" id="event-cost">$ $ $ $ $</div>
-            <div class="time" id="event-time">6:30 pm</div>
-            <div class="event-date" id="event-date">4/27</div>
+            <div class="dollar-cost" id="event-cost1">$ $ $ $ $</div>
+            <div class="time" id="event-time1">6:30 pm</div>
+            <div class="event-date" id="event-date1">4/27</div>
           </div>
 
           <ul class="list-group list-group-flush">
@@ -135,7 +136,7 @@
 <!-- this ius the create event modal allowing users to create new events -->
 
 <!-- Modal -->
-<div class="modal fade" id="create-event" role="dialog">
+<div class="modal fade" id="create-event-index" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
@@ -147,13 +148,13 @@
           <!-- this is the form control allowing the user to enter in the information for the event -->
           <form role="form">
             <div class="form-group row">
-              <label for="creator-name">Name:</label>
-              <input class="form-control" id="creator-name" type="text" />
+              <label for="creator-name-input">Name:</label>
+              <input class="form-control" id="creator-name-input" type="text" />
             </div>
             <div class="form-group row">
-              <label for="event-cost">Cost: </label>
+              <label for="event-cost-input">Cost: </label>
               <p>
-                <select id="event-cost">
+                <select id="event-cost-input">
                   <option value="5">$5</option>
                   <option value="10">$10</option>
                   <option value="20">$20</option>
@@ -165,23 +166,23 @@
                   <option value="100+">$100+</option>
                 </select>
               </p>
-              <!-- <input class="form-control" id="event-cost" type="cost"> -->
+
             </div>
             <div class="form-group row">
-              <label for="event-date">Date:</label>
-              <input class="form-control" id="event-date" type="date" />
-              <label for="event-time">Time:</label>
-              <input class="form-control" id="event-time" type="time" />
-              <label for="event-number">Number of People:</label>
-              <input class="form-control" id="event-number" type="number" />
+              <label for="event-date-input">Date:</label>
+              <input class="form-control" id="event-date-input" type="date" />
+              <label for="event-time-input">Time:</label>
+              <input class="form-control" id="event-time-input" type="time" />
+              <label for="event-number-input">Number of People:</label>
+              <input class="form-control" id="event-number-input" type="number" />
             </div>
             <div class="form-group row">
-              <label for="event-address">Address:</label>
-              <input class="form-control" id="event-address" type="address" />
+              <label for="event-address-input">Address:</label>
+              <input class="form-control" id="event-address-input" type="address" />
             </div>
             <div class="form-group row">
-              <label for="event-description">Description?</label>
-              <textarea class="form-control" id="event-description" rows="2"></textarea>
+              <label for="event-description-input">Description?</label>
+              <textarea class="form-control" id="event-description-input" rows="2"></textarea>
             </div>
           </form>
         </div>
@@ -212,12 +213,12 @@
 
           <form role="form">
             <div class="form-group row">
-              <label for="attendee-name">Attendee Name:</label>
-              <input class="form-control" id="attendee-name" type="text">
+              <label for="attendee-name-input">Attendee Name:</label>
+              <input class="form-control" id="attendee-name-input" type="text">
             </div>
             <div class="form-group row">
-              <label for="attendee-email">Attendee-email:</label>
-              <input class="form-control" id="attendee-email" type="text">
+              <label for="attendee-email-input">Attendee-email:</label>
+              <input class="form-control" id="attendee-email-input" type="text">
             </div>
           </form>
         </div>
