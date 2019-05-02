@@ -50,7 +50,8 @@ $("#create-event").on("click", function (event) {
   };
 
   // Uploads event data to the database
-  database.ref().push(newEvent);
+  var newPostRef = database.ref().push(newEvent);
+  var ID = newPostRef.key;
 
   // Logs everything to console
   console.log(newEvent.name);
@@ -89,6 +90,7 @@ $("#create-event").on("click", function (event) {
     console.log(eventdescription);
     console.log(eventCost);
     console.log(eventDate);
+    console.log(ID);
   });
 
 });
@@ -111,11 +113,13 @@ $("#join-event").on("click", function (event) {
   };
 
   // Uploads event data to the database
-  database.ref().push(newEvent);
+  var newPostRef = database.ref().push(newEvent);
+  var ID = newPostRef.key;
 
   // Logs everything to console
   console.log(newEvent.attendeeName);
   console.log(newEvent.attendeeEmailAddress);
+  console.log(ID);
   console.log("Join successfully added");
 
   // Clears all of the text-boxes
@@ -132,9 +136,11 @@ $("#join-event").on("click", function (event) {
     var attendeeEmailAddress = childSnapshot.val().attendeeEmailAddress;
 
 
+
     // event Info
     console.log(attendeeName);
     console.log(attendeeEmailAddress);
+
 
 
 
