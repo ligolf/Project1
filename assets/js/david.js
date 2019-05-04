@@ -26,6 +26,9 @@ $("#create-event").on("click", function (event) {
   var eventTime = $("#event-time-input")
     .val()
     .trim();
+  var eventNumber = $("#event-number-input")
+    .val()
+    .trim();
   var eventdescription = $("#event-description-input")
     .val()
     .trim();
@@ -44,6 +47,7 @@ $("#create-event").on("click", function (event) {
     name: creatorName,
     address: eventAddress,
     time: eventTime,
+    number: eventNumber,
     description: eventdescription,
     cost: eventCost,
     date: eventDate
@@ -59,6 +63,7 @@ $("#create-event").on("click", function (event) {
   console.log(newEvent.time);
   console.log(newEvent.cost);
   console.log(newEvent.date);
+  console.log(newEvent.number);
   console.log(newEvent.description);
   console.log("event successfully added");
 
@@ -68,6 +73,7 @@ $("#create-event").on("click", function (event) {
   $("#event-date-input").val("");
   $("#event-time-input").val("");
   $("#event-cost-input").val("");
+  $("#event-number-input").val("");
   $("#event-description-input").val("");
 
 
@@ -79,6 +85,7 @@ $("#create-event").on("click", function (event) {
     var creatorName = childSnapshot.val().name;
     var eventAddress = childSnapshot.val().address;
     var eventTime = childSnapshot.val().time;
+    var eventNumber = childSnapshot.val().number;
     var eventdescription = childSnapshot.val().description;
     var eventCost = childSnapshot.val().cost;
     var eventDate = childSnapshot.val().date;
@@ -87,6 +94,7 @@ $("#create-event").on("click", function (event) {
     console.log(creatorName);
     console.log(eventAddress);
     console.log(eventTime);
+    console.log(eventNumber);
     console.log(eventdescription);
     console.log(eventCost);
     console.log(eventDate);
@@ -127,6 +135,7 @@ $("#join-event").on("click", function (event) {
   $("#attendee-email-input").val("");
 
 
+
   // 3. Create Firebase event for pulling events from the database and a row in the html when a user adds an entry
   database.ref().on("child_added", function (childSnapshot) {
     console.log(childSnapshot.val());
@@ -135,13 +144,14 @@ $("#join-event").on("click", function (event) {
     var attendeeName = childSnapshot.val().attendeeName;
     var attendeeEmailAddress = childSnapshot.val().attendeeEmailAddress;
 
+    // name = "robin williams";
 
 
     // event Info
     console.log(attendeeName);
     console.log(attendeeEmailAddress);
 
-
+    // userRef.child(name).update({ attendeeName: moment(value.attendeeName).toDate().getTime() })
 
 
     // Create the new row
