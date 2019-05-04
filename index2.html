@@ -37,12 +37,22 @@
               // failed.", it means you probably did not give permission for the browser to
               // locate you.
               var map, infoWindow;
+
               function initMap() {
                 map = new google.maps.Map(document.getElementById('googleMap'), {
-                  center: { lat: -34.397, lng: 150.644 },
+                  center: {
+                    lat: -34.397,
+                    lng: 150.644
+                  },
                   zoom: 6
                 });
                 infoWindow = new google.maps.InfoWindow;
+
+                /*     google.maps.event.addListener(map, 'click', function(event) {
+                      addMarker({
+                        coords: event.latLng
+                      });
+                    }); */
 
                 // Try HTML5 geolocation.
                 if (navigator.geolocation) {
@@ -75,7 +85,7 @@
             </script>
             <script async defer
               src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAC2cAJA7U2M48ifiZpjMKRzrFNBYal9fc&callback=initMap">
-              </script>
+            </script>
           </div>
         </div>
       </div>
