@@ -13,7 +13,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 console.log(database);
 // 2. Button for adding Events - may need to change this to add different ids provided by tahir
-$('#create-event').on('click', function(event) {
+$('#create-event').on('click', function (event) {
   event.preventDefault();
 
   // Grabs user input
@@ -85,7 +85,7 @@ $('#create-event').on('click', function(event) {
 });
 
 // 3. Create Firebase event for pulling events from the database and a row in the html when a user adds an entry
-database.ref().on('child_added', function(childSnapshot) {
+database.ref().on('child_added', function (childSnapshot) {
   console.log(childSnapshot.val());
 
   // Store everything into a variable.
