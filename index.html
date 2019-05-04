@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Drunken Screw</title>
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+    />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
 
     <!-- Firebase Reference -->
     <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase.js"></script>
@@ -21,129 +24,280 @@
     <!-- Moment.js Reference -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
     <style>
-        .mapimage {
-            width: 100%;
-        }
+      .mapimage {
+        width: 100%;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <div class="row">
-            <!-- Sign-Up Card-->
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-header map-header">
-                        Drunkin Screw Locations
-                    </div>
-                    <div class="card-body">
-                        <!-- <div class="map-holder">
-                            <img src="assets/images/map.png" alt="location map" class="mapimage" /> -->
-                        <div id="googleMap" style="width:100%;height:400px;"></div>
-
-                        <script>
-                            // Note: This example requires that you consent to location sharing when
-                            // prompted by your browser. If you see the error "The Geolocation service
-                            // failed.", it means you probably did not give permission for the browser to
-                            // locate you.
-                            var map, infoWindow;
-                            function initMap() {
-                                map = new google.maps.Map(document.getElementById('googleMap'), {
-                                    center: {
-                                        lat: -34.397,
-                                        lng: 150.644
-                                    },
-                                    zoom: 6
-                                });
-                                infoWindow = new google.maps.InfoWindow;
-                                google.maps.event.addListener(map, 'click', function (event) {
-                                    addMarker({
-                                        coords: event.latLng
-                                    });
-                                });
-                                // Try HTML5 geolocation.
-                                if (navigator.geolocation) {
-                                    navigator.geolocation.getCurrentPosition(function (position) {
-                                        var pos = {
-                                            lat: position.coords.latitude,
-                                            lng: position.coords.longitude
-                                        };
-                                        infoWindow.setPosition(pos);
-                                        infoWindow.setContent('Location found.');
-                                        infoWindow.open(map);
-                                        map.setCenter(pos);
-                                    }, function () {
-                                        handleLocationError(true, infoWindow, map.getCenter());
-                                    });
-                                } else {
-                                    // Browser doesn't support Geolocation
-                                    handleLocationError(false, infoWindow, map.getCenter());
-                                }
-                            }
-                            function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-                                infoWindow.setPosition(pos);
-                                infoWindow.setContent(browserHasGeolocation ?
-                                    'Error: The Geolocation service failed.' :
-                                    'Error: Your browser doesn\'t support geolocation.');
-                                infoWindow.open(map);
-                            }
-                        </script>
-                        <script async defer
-                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAC2cAJA7U2M48ifiZpjMKRzrFNBYal9fc&callback=initMap">
-                            </script>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12 text-center">
-            <div class="create-button-holder">
-                <div class="create-event-button">
-                    <button type="button" class="btn btn-success center-block" data-toggle="modal"
-                        data-target="#create-event-index">
-                        Create An Event
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- this is START back up table just in case card does not work -->
-    <div class="row">
+      <div class="row">
+        <!-- Sign-Up Card-->
         <div class="col-lg-12">
-        <!-- Current Drunken Screw-->
-        <div class="card mb-4">
-            <div class="card-header">Current Employees</div>
+          <div class="card">
+            <div class="card-header map-header">
+              Drunkin Screw Locations
+            </div>
             <div class="card-body">
-            <table class="table table-sm table-hover" id="new-event-listings">
+              <!-- <div class="map-holder">
+                            <img src="assets/images/map.png" alt="location map" class="mapimage" /> -->
+              <div id="googleMap" style="width:100%;height:400px;"></div>
+
+              <script>
+                // Note: This example requires that you consent to location sharing when
+                // prompted by your browser. If you see the error "The Geolocation service
+                // failed.", it means you probably did not give permission for the browser to
+                // locate you.
+                var map, infoWindow;
+                function initMap() {
+                  map = new google.maps.Map(
+                    document.getElementById('googleMap'),
+                    {
+                      center: {
+                        lat: -34.397,
+                        lng: 150.644
+                      },
+                      zoom: 6
+                    }
+                  );
+                  infoWindow = new google.maps.InfoWindow();
+                  google.maps.event.addListener(map, 'click', function(event) {
+                    addMarker({
+                      coords: event.latLng
+                    });
+                  });
+                  // Try HTML5 geolocation.
+                  if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                      function(position) {
+                        var pos = {
+                          lat: position.coords.latitude,
+                          lng: position.coords.longitude
+                        };
+                        infoWindow.setPosition(pos);
+                        infoWindow.setContent('Location found.');
+                        infoWindow.open(map);
+                        map.setCenter(pos);
+                      },
+                      function() {
+                        handleLocationError(true, infoWindow, map.getCenter());
+                      }
+                    );
+                  } else {
+                    // Browser doesn't support Geolocation
+                    handleLocationError(false, infoWindow, map.getCenter());
+                  }
+                }
+                function handleLocationError(
+                  browserHasGeolocation,
+                  infoWindow,
+                  pos
+                ) {
+                  infoWindow.setPosition(pos);
+                  infoWindow.setContent(
+                    browserHasGeolocation
+                      ? 'Error: The Geolocation service failed.'
+                      : "Error: Your browser doesn't support geolocation."
+                  );
+                  infoWindow.open(map);
+                }
+              </script>
+              <script
+                async
+                defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAC2cAJA7U2M48ifiZpjMKRzrFNBYal9fc&callback=initMap"
+              ></script>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <div class="create-button-holder">
+            <div class="create-event-button">
+              <button
+                type="button"
+                class="btn btn-success center-block"
+                data-toggle="modal"
+                data-target="#create-event-index"
+              >
+                Create An Event
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- this is START back up table just in case card does not work -->
+
+      <div class="row">
+        <div class="col-lg-12">
+          <!-- Current Drunken Screw-->
+          <div class="card mb-4">
+            <div class="card-header">Current Drunkin Screw</div>
+            <div class="card-body">
+              <table class="table table-sm table-hover" id="new-event-listings">
                 <thead>
-                <tr>
+                  <tr>
                     <th scope="col" width="7%">Creator Name</th>
                     <th scope="col" width="5%">Date</th>
                     <th scope="col" width="3%">Time</th>
                     <th scope="col" width="3%">Cost</th>
-                    <th scope="col" width="30l%">Address</th>
+                    <th scope="col" width="30%">Address</th>
                     <th scope="col" width="60%">Description</th>
                     <th scope="col" width="2%">Join</th>
-                </tr>
+                  </tr>
                 </thead>
                 <tbody class="table-body"></tbody>
-            </table>
+              </table>
             </div>
+          </div>
         </div>
-        </div>
+      </div>
     </div>
-    <!-- this is END of back up table just in case card does not work -->
-<!-- this is START iceboxed listing cards -->
-    <!-- <div class="row">
+    <div class="footer">
+      <p>Footer</p>
+    </div>
+    <link type="text/css" rel="stylesheet" href="assets/css/style.css" />
+  </body>
+</html>
+
+<div class="event-card-holder"></div>
+
+<!-- this ius the create event modal allowing users to create new events -->
+
+<!-- Modal -->
+<div class="modal fade" id="create-event-index" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Create an Event</h4>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <!-- this is the form control allowing the user to enter in the information for the event -->
+          <form role="form">
+            <div class="form-group row">
+              <label for="creator-name-input">Name:</label>
+              <input class="form-control" id="creator-name-input" type="text" />
+            </div>
+            <div class="form-group row">
+              <label for="event-cost-input">Cost: </label>
+              <p>
+                <select id="event-cost-input">
+                  <option value="5">$5</option>
+                  <option value="10">$10</option>
+                  <option value="20">$20</option>
+                  <option value="30">$30</option>
+                  <option value="40">$40</option>
+                  <option value="50">$50</option>
+                  <option value="75">$75</option>
+                  <option value="100">$100</option>
+                  <option value="100+">$100+</option>
+                </select>
+              </p>
+            </div>
+            <div class="form-group row">
+              <label for="event-date-input">Date:</label>
+              <input class="form-control" id="event-date-input" type="date" />
+              <label for="event-time-input">Time:</label>
+              <input class="form-control" id="event-time-input" type="time" />
+              <label for="event-number-input">Number of People:</label>
+              <input
+                class="form-control"
+                id="event-number-input"
+                type="number"
+              />
+            </div>
+            <div class="form-group row">
+              <label for="event-address-input">Address:</label>
+              <input
+                class="form-control"
+                id="event-address-input"
+                type="address"
+              />
+            </div>
+            <div class="form-group row">
+              <label for="event-description-input">Description?</label>
+              <textarea
+                class="form-control"
+                id="event-description-input"
+                rows="2"
+              ></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-default"
+            id="create-event"
+            data-dismiss="modal"
+          >
+            Create Event
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="event-join" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Join an Event</h4>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <form role="form">
+            <div class="form-group row">
+              <label for="attendee-name-input">Attendee Name:</label>
+              <input
+                class="form-control"
+                id="attendee-name-input"
+                type="text"
+              />
+            </div>
+            <div class="form-group row">
+              <label for="attendee-email-input">Attendee-email:</label>
+              <input
+                class="form-control"
+                id="attendee-email-input"
+                type="text"
+              />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-default"
+            id="join-event"
+            data-dismiss="modal"
+          >
+            Join Event
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="assets/js/tahir.js"></script>
+  <!-- <script src="assets/js/david.js"></script> -->
+
+  <!-- this is END of back up table just in case card does not work -->
+  <!-- this is START iceboxed listing cards -->
+  <!-- <div class="row">
         <div class="col-lg-6">
             <div class="card rounded">
                 <div class="card-header event-card-header"> -->
-                    <!-- <button type="button" class="btn btn-info" id="event-join">Join</button>
+  <!-- <button type="button" class="btn btn-info" id="event-join">Join</button>
                   <div class="dollar-cost">$ $ $ $ $</div> -->
-                    <!-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#event-join">
+  <!-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#event-join">
                         Join
                     </button>
                     <div class="dollar-cost" id="event-cost1">$ $ $ $ $</div>
@@ -194,121 +348,5 @@
         </div>
 
     </div> -->
-    <!-- this is END iceboxed listing cards -->
-    <!-- <div class="footer">
-      <p>Footer</p>
-
-    </div> -->
-
-    </div>
-    <div class="footer">
-        <p>Footer</p>
-    </div>
-    <link type="text/css" rel="stylesheet" href="assets/css/style.css" />
-
-</body>
-
-</html>
-
-<div class="event-card-holder"></div>
-
-<!-- this ius the create event modal allowing users to create new events -->
-
-<!-- Modal -->
-<div class="modal fade" id="create-event-index" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Create an Event</h4>
-            </div>
-            <div class="modal-body">
-                <div class="card-body">
-                    <!-- this is the form control allowing the user to enter in the information for the event -->
-                    <form role="form">
-                        <div class="form-group row">
-                            <label for="creator-name-input">Name:</label>
-                            <input class="form-control" id="creator-name-input" type="text" />
-                        </div>
-                        <div class="form-group row">
-                            <label for="event-cost-input">Cost: </label>
-                            <p>
-                                <select id="event-cost-input">
-                                    <option value="5">$5</option>
-                                    <option value="10">$10</option>
-                                    <option value="20">$20</option>
-                                    <option value="30">$30</option>
-                                    <option value="40">$40</option>
-                                    <option value="50">$50</option>
-                                    <option value="75">$75</option>
-                                    <option value="100">$100</option>
-                                    <option value="100+">$100+</option>
-                                </select>
-                            </p>
-
-                        </div>
-                        <div class="form-group row">
-                            <label for="event-date-input">Date:</label>
-                            <input class="form-control" id="event-date-input" type="date" />
-                            <label for="event-time-input">Time:</label>
-                            <input class="form-control" id="event-time-input" type="time" />
-                            <label for="event-number-input">Number of People:</label>
-                            <input class="form-control" id="event-number-input" type="number" />
-                        </div>
-                        <div class="form-group row">
-                            <label for="event-address-input">Address:</label>
-                            <input class="form-control" id="event-address-input" type="address" />
-                        </div>
-                        <div class="form-group row">
-                            <label for="event-description-input">Description?</label>
-                            <textarea class="form-control" id="event-description-input" rows="2"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" id="create-event" data-dismiss="modal">
-                        Create Event
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+  <!-- this is END iceboxed listing cards -->
 </div>
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="event-join" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-
-                <h4 class="modal-title">Join an Event</h4>
-            </div>
-            <div class="modal-body">
-                <div class="card-body">
-
-                    <form role="form">
-                        <div class="form-group row">
-                            <label for="attendee-name-input">Attendee Name:</label>
-                            <input class="form-control" id="attendee-name-input" type="text">
-                        </div>
-                        <div class="form-group row">
-                            <label for="attendee-email-input">Attendee-email:</label>
-                            <input class="form-control" id="attendee-email-input" type="text">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" id="join-event" data-dismiss="modal">
-                        Join Event
-                    </button>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-    <script src="assets/js/david.js"></script>
