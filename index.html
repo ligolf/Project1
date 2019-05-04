@@ -27,6 +27,13 @@
       .mapimage {
         width: 100%;
       }
+
+      /* Media Query Section */
+      @media only screen and (max-width: 600px) {
+        .table-body-text {
+          padding: 6px;
+        }
+      }
     </style>
   </head>
 
@@ -149,7 +156,7 @@
                     <th scope="col" width="2%">Join</th>
                   </tr>
                 </thead>
-                <tbody class="table-body"></tbody>
+                <tbody class="table-body-text"></tbody>
               </table>
             </div>
           </div>
@@ -287,17 +294,19 @@
     </div>
   </div>
   <script src="assets/js/tahir.js"></script>
-  <!-- <script src="assets/js/david.js"></script> -->
+</div>
 
-  <!-- this is END of back up table just in case card does not work -->
-  <!-- this is START iceboxed listing cards -->
-  <!-- <div class="row">
+<!-- <script src="assets/js/david.js"></script> -->
+
+<!-- this is END of back up table just in case card does not work -->
+<!-- this is START iceboxed listing cards -->
+<!-- <div class="row">
         <div class="col-lg-6">
             <div class="card rounded">
                 <div class="card-header event-card-header"> -->
-  <!-- <button type="button" class="btn btn-info" id="event-join">Join</button>
+<!-- <button type="button" class="btn btn-info" id="event-join">Join</button>
                   <div class="dollar-cost">$ $ $ $ $</div> -->
-  <!-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#event-join">
+<!-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#event-join">
                         Join
                     </button>
                     <div class="dollar-cost" id="event-cost1">$ $ $ $ $</div>
@@ -348,5 +357,4 @@
         </div>
 
     </div> -->
-  <!-- this is END iceboxed listing cards -->
-</div>
+<!-- this is END iceboxed listing cards -->
