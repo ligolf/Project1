@@ -31,7 +31,11 @@
       /* Media Query Section */
       @media only screen and (max-width: 600px) {
         .table-body-text {
-          padding: 6px;
+          padding: 4px;
+        }
+        td.lPad {
+          /* Behave  like a "row" */
+          padding-left: 100px;
         }
       }
     </style>
@@ -152,7 +156,9 @@
                     <th scope="col" width="3%">Time</th>
                     <th scope="col" width="3%">Cost</th>
                     <th scope="col" width="30%">Address</th>
-                    <th scope="col" width="60%">Description</th>
+                    <th scope="col" width="60%" class="hide-column">
+                      Description
+                    </th>
                     <th scope="col" width="2%">Join</th>
                   </tr>
                 </thead>

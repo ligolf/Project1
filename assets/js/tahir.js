@@ -80,6 +80,7 @@ database.ref().on('child_added', function(childSnapshot) {
   var eventAddressOutput = childSnapshot.val().address;
   var eventTimeOutput = childSnapshot.val().time;
   var eventdescriptionOutput = childSnapshot.val().description;
+  // eventdescriptionOutput.attr('class', 'hide-column');
   var eventCostOutput = childSnapshot.val().cost;
   var eventDateOutput = childSnapshot.val().date;
   var joinButton = $('<button>');
@@ -99,13 +100,13 @@ database.ref().on('child_added', function(childSnapshot) {
 
   // Create the new row
   var newRow = $('<tr>').append(
-    $('<td>').text(creatorNameOutput),
-    $('<td>').text(eventDateOutput),
-    $('<td>').text(eventTimeOutput),
-    $('<td>').text(eventCostOutput),
-    $('<td>').text(eventAddressOutput),
-    $('<td>').text(eventdescriptionOutput),
-    $('<td>').html(joinButton)
+    $('<td class="px-2">').text(creatorNameOutput),
+    $('<td class="px-2">').text(eventDateOutput),
+    $('<td class="px-2">').text(eventTimeOutput),
+    $('<td class="px-2">').text(eventCostOutput),
+    $('<td class="px-2">').text(eventAddressOutput),
+    $('<td class="px-2">').text(eventdescriptionOutput),
+    $('<td class="join-mobile-button">').html(joinButton)
   );
 
   // Append the new row to the table

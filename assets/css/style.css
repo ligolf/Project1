@@ -76,8 +76,89 @@ tbody {
 
 /* Media Query Section */
 @media only screen and (max-width: 600px) {
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  /* Hide table headers (but not display: none;, for accessibility) */
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+  }
+
+  td {
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    /* padding-left: 100px; */
+  }
+
+  /* .lPad { */
+    /* Behave  like a "row" */
+    /* padding-left: 100px; */
+    /* padding-left: ($spacer * .5) !important;
+  } */
+    
+    .px-2 {
+      padding-left: 15rem !important;
+      /* padding-right: ($spacer * .5) !important; */
+    }
+  }
+
+  td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 8px;
+    left: 8px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+
+  .join-mobile-button {
+    height: 53px;
+  }
+
+  /*
+	Label the data
+	*/
+  td:nth-of-type(1):before {
+    content: 'Creator Name';
+  }
+  td:nth-of-type(2):before {
+    content: 'Date:';
+  }
+  td:nth-of-type(3):before {
+    content: 'Time:';
+  }
+  td:nth-of-type(4):before {
+    content: 'Cost:';
+  }
+  td:nth-of-type(5):before {
+    content: 'Address:';
+  }
+  td:nth-of-type(6):before {
+    content: 'Description:';
+  }
+  td:nth-of-type(7):before {
+    content: '';
+  }
+
   body {
-    font-size: 10px;
+    font-size: 12px;
   }
 
   .btn-success {
@@ -91,7 +172,8 @@ tbody {
     width: 100%;
     float: left;
   }
-  /* .table-body-text {
-    padding: 5px;
+
+  /* .hide-column {
+    display: none;
   } */
 }
