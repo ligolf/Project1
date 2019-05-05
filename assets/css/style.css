@@ -45,7 +45,7 @@ tbody {
 }
 
 .btn-info {
-  font-size: 15px;
+  font-size: 18px;
   width: 100%;
   float: left;
 }
@@ -126,7 +126,7 @@ tbody {
   }
 
   .px-2 {
-    padding-left: 11rem !important;
+    padding-left: 12rem !important;
   }
 
   td:before {
@@ -139,6 +139,7 @@ tbody {
     padding-right: 10px;
     white-space: nowrap;
     color: green;
+    font-weight: 550;
     opacity: 1;
     /* display: block; */
     /* visibility: visible; */
