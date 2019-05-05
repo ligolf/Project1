@@ -74,10 +74,108 @@ tbody {
   background-color: darkslategrey;
 }
 
-/* Media Query Section */
-@media only screen and (max-width: 600px) {
+/* Media Query Section 1024px */
+@media screen and (min-width: 770px) and (max-width: 1024px) {
+  td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 8px;
+    left: 8px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    color: red;
+    display: none;
+    /* visibility: hidden; */
+    /* opacity: 0; */
+    /* visibility: collapse; */
+  }
+}
+
+/* Media Query Section 760px*/
+@media screen and (min-width: 0px) and (max-width: 769px) {
+  /* @media only screen and (max-width: 760px){ */
+  /* (min-device-width: 768px) and (max-device-width: 1024px)  { */
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  /* Hide table headers (but not display: none;, for accessibility) */
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+  }
+
+  td {
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+  }
+
+  .px-2 {
+    padding-left: 11rem !important;
+  }
+
+  td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 8px;
+    left: 8px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    color: green;
+    opacity: 1;
+    /* display: block; */
+    /* visibility: visible; */
+    /* visibility: initial; */
+  }
+
+  .join-mobile-button {
+    height: 53px;
+  }
+
+  /*
+	Label the data
+	*/
+  td:nth-of-type(1):before {
+    content: 'Creator Name:';
+  }
+  td:nth-of-type(2):before {
+    content: 'Date:';
+  }
+  td:nth-of-type(3):before {
+    content: 'Time:';
+  }
+  td:nth-of-type(4):before {
+    content: 'Cost:';
+  }
+  td:nth-of-type(5):before {
+    content: 'Address:';
+  }
+  td:nth-of-type(6):before {
+    content: 'Description:';
+  }
+  td:nth-of-type(7):before {
+    content: '';
+  }
+
   body {
-    font-size: 10px;
+    font-size: 14px;
   }
 
   .btn-success {
@@ -91,7 +189,8 @@ tbody {
     width: 100%;
     float: left;
   }
-  /* .table-body-text {
-    padding: 5px;
+
+  /* .hide-column {
+    display: none;
   } */
 }
