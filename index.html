@@ -141,11 +141,11 @@
                 <thead>
                   <tr>
                     <th scope="col" width="13%">Creator Name</th>
-                    <th scope="col" width="5%">Date</th>
+                    <th scope="col" width="6%">Date</th>
                     <th scope="col" width="3%">Time</th>
                     <th scope="col" width="3%">Cost</th>
                     <th scope="col" width="25%">Address</th>
-                    <th scope="col" width="50%" class="hide-column">
+                    <th scope="col" width="45%" class="hide-column">
                       Description
                     </th>
                     <th scope="col" width="2%">Join</th>
@@ -202,8 +202,17 @@
               </p>
             </div>
             <div class="form-group row">
-              <label for="event-date-input">Date:</label>
-              <input class="form-control" id="event-date-input" type="date" />
+              <!-- <label for="event-date-input">Date:</label>
+              <input class="form-control" id="event-date-input" type="date" /> -->
+              <!-- Label to Test for different date input-->
+              <label for="start-input">Date (MM/DD/YYYY)</label>
+              <input
+                class="form-control"
+                id="event-date-input"
+                placeholder="05/08/2019"
+                type="text"
+              />
+              <!--END Label to Test for different date input-->
               <label for="event-time-input">Time:</label>
               <input class="form-control" id="event-time-input" type="time" />
               <label for="event-number-input">Number of People:</label>
