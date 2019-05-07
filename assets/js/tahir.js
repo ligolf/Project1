@@ -140,7 +140,7 @@ database.ref().on('child_added', function (childSnapshot) {
 });
 
 // listener for adding attendees
-$('#join-event').on('click', function(event) {
+$('#join-event').on('click', function (event) {
   event.preventDefault();
 
   // Grabs user input
