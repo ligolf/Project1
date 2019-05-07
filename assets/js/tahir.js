@@ -12,7 +12,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 console.log(database);
 
-$('#create-event').on('click', function(event) {
+$('#create-event').on('click', function (event) {
   event.preventDefault();
 
   // Grabs user input
@@ -23,6 +23,9 @@ $('#create-event').on('click', function(event) {
     .val()
     .trim();
   var eventTime = $('#event-time-input')
+    .val()
+    .trim();
+  var eventNumber = $('#event-number-input')
     .val()
     .trim();
 
@@ -43,23 +46,25 @@ $('#create-event').on('click', function(event) {
     name: creatorName,
     address: eventAddress,
     time: eventTime,
-    // number: eventNumber,
+    number: eventNumber,
     description: eventdescription,
     cost: eventCost,
     date: eventDate
   };
 
   // Uploads event data to the database
-  database.ref().push(newEvent);
+  var newPostRef = database.ref().push(newEvent);
+  var ID = newPostRef.key;
 
   // Logs everything to console
-  console.log(newEvent.name);
-  console.log(newEvent.address);
-  console.log(newEvent.time);
-  console.log(newEvent.cost);
-  console.log(newEvent.date);
-  console.log(newEvent.number);
-  console.log(newEvent.description);
+  console.log("name:" + newEvent.name);
+  console.log("address:" + newEvent.address);
+  console.log("time:" + newEvent.time);
+  console.log("cost:" + newEvent.cost);
+  console.log("date:" + newEvent.date);
+  console.log("number:" + newEvent.number);
+  console.log("description:" + newEvent.description);
+  console.log("ID:" + ID);
   console.log('event successfully added');
 
   // Clears all of the text-boxes
@@ -72,17 +77,20 @@ $('#create-event').on('click', function(event) {
   $('#event-description-input').val('');
 });
 
-database.ref().on('child_added', function(childSnapshot) {
+database.ref().on('child_added', function (childSnapshot) {
   console.log(childSnapshot.val());
 
   // Store everything into a variable.
   var creatorNameOutput = childSnapshot.val().name;
+  var attendeeNumberOutput = childSnapshot.val().number;
   var eventAddressOutput = childSnapshot.val().address;
   var eventTimeOutput = childSnapshot.val().time;
   var eventdescriptionOutput = childSnapshot.val().description;
+
   // eventdescriptionOutput.attr('class', 'hide-column');
   var eventCostOutput = childSnapshot.val().cost;
   var eventDateOutput = childSnapshot.val().date;
+  var eventDatePrettyOutput = moment.unix(eventDateOutput).format('MM/DD/YYYY');
   var joinButton = $('<button>');
   joinButton.attr('type', 'button');
   joinButton.attr('class', 'btn btn-info');
@@ -95,13 +103,15 @@ database.ref().on('child_added', function(childSnapshot) {
   console.log(eventAddressOutput);
   console.log(eventTimeOutput);
   console.log(eventdescriptionOutput);
+  console.log(eventDatePrettyOutput)
   console.log(eventCostOutput);
-  console.log(eventDateOutput);
+
 
   // Create the new row
   var newRow = $('<tr>').append(
     $('<td class="px-2">').text(creatorNameOutput),
-    $('<td class="px-2">').text(eventDateOutput),
+    $('<td class="px-2">').text(attendeeNumberOutput),
+    $('<td class="px-2">').text(eventDatePrettyOutput),
     $('<td class="px-2">').text(eventTimeOutput),
     $('<td class="px-2">').text(eventCostOutput),
     $('<td class="px-2">').text(eventAddressOutput),
