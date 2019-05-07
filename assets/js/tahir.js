@@ -29,6 +29,10 @@ $('#create-event').on('click', function (event) {
     .val()
     .trim();
 
+  var attendessCounter = $('#event-number-input')
+    .val()
+    .trim();
+
   var eventdescription = $('#event-description-input')
     .val()
     .trim();
@@ -46,13 +50,19 @@ $('#create-event').on('click', function (event) {
     name: creatorName,
     address: eventAddress,
     time: eventTime,
+
     number: eventNumber,
+
     description: eventdescription,
     cost: eventCost,
-    date: eventDate
+    date: eventDate,
+    attendees: attendessCounter,
+    attendees_name: '',
+    attendees_email: ''
   };
 
   // Uploads event data to the database
+
   var newPostRef = database.ref().push(newEvent);
   var ID = newPostRef.key;
 
@@ -65,12 +75,13 @@ $('#create-event').on('click', function (event) {
   console.log("number:" + newEvent.number);
   console.log("description:" + newEvent.description);
   console.log("ID:" + ID);
+
   console.log('event successfully added');
 
   // Clears all of the text-boxes
 
   $('#creator-name-input').val('');
-  $('event-address-input').val('');
+  $('#event-address-input').val('');
   $('#event-date-input').val('');
   $('#event-time-input').val('');
   $('#event-cost-input').val('');
@@ -87,9 +98,11 @@ database.ref().on('child_added', function (childSnapshot) {
   var eventTimeOutput = childSnapshot.val().time;
   var eventdescriptionOutput = childSnapshot.val().description;
 
+
   // eventdescriptionOutput.attr('class', 'hide-column');
   var eventCostOutput = childSnapshot.val().cost;
   var eventDateOutput = childSnapshot.val().date;
+
   var eventDatePrettyOutput = moment.unix(eventDateOutput).format('MM/DD/YYYY');
   var joinButton = $('<button>');
   joinButton.attr('type', 'button');
@@ -106,11 +119,14 @@ database.ref().on('child_added', function (childSnapshot) {
   console.log(eventDatePrettyOutput)
   console.log(eventCostOutput);
 
+  console.log(eventDatePrettyOutput);
 
   // Create the new row
   var newRow = $('<tr>').append(
     $('<td class="px-2">').text(creatorNameOutput),
+
     $('<td class="px-2">').text(attendeeNumberOutput),
+
     $('<td class="px-2">').text(eventDatePrettyOutput),
     $('<td class="px-2">').text(eventTimeOutput),
     $('<td class="px-2">').text(eventCostOutput),
@@ -121,4 +137,36 @@ database.ref().on('child_added', function (childSnapshot) {
 
   // Append the new row to the table
   $('#new-event-listings > tbody').prepend(newRow);
+});
+
+// listener for adding attendees
+$('#join-event').on('click', function(event) {
+  event.preventDefault();
+
+  // Grabs user input
+  var attendeesName = $('#attendee-name-input')
+    .val()
+    .trim();
+  var attendeesEmail = $('#attendee-email-input')
+    .val()
+    .trim();
+
+  var newEvent = {
+    attendees_name: attendeesName,
+    attendees_email: attendeesEmail
+  };
+
+  // Uploads event data to the database
+  database.ref().push(newEvent);
+
+  // Logs everything to console
+  console.log(newEvent.attendees_name);
+  console.log(newEvent.attendees_email);
+  console.log(postId);
+  console.log('attendee successfully added');
+
+  // Clears all of the text-boxes
+
+  $('#attendee-name-input').val('');
+  $('#attendee-email-input').val('');
 });
