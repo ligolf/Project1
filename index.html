@@ -1,168 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Drunken Screw</title>
-    <!-- Bootstrap -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Drunken Screw</title>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <!-- Firebase Reference -->
-    <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
-    <!-- Moment.js Reference -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-    <style>
-      /* .mapimage {
+  <!-- Firebase Reference -->
+  <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase.js"></script>
+
+  <!-- Moment.js Reference -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+  <style>
+    /* .mapimage {
         width: 100%;
       } */
-    </style>
-  </head>
+  </style>
+</head>
 
-  <body>
-    <div class="container">
-      <div class="row">
-        <!-- Sign-Up Card-->
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-header map-header">
-              Drunkin Screw Locations
-            </div>
-            <div class="card-body">
-              <!-- <div class="map-holder">
+<body>
+  <div class="container">
+    <div class="row">
+      <!-- Sign-Up Card-->
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header map-header">
+            Drunkin Screw Locations
+          </div>
+          <div class="card-body">
+            <!-- <div class="map-holder">
                             <img src="assets/images/map.png" alt="location map" class="mapimage" /> -->
-              <div id="googleMap" style="width:100%;height:400px;"></div>
+            <div id="googleMap" style="width:100%;height:400px;"></div>
 
-              <script>
-                // Note: This example requires that you consent to location sharing when
-                // prompted by your browser. If you see the error "The Geolocation service
-                // failed.", it means you probably did not give permission for the browser to
-                // locate you.
-                var map, infoWindow;
-                function initMap() {
-                  map = new google.maps.Map(
-                    document.getElementById('googleMap'),
-                    {
-                      center: {
-                        lat: -34.397,
-                        lng: 150.644
-                      },
-                      zoom: 6
+            <script>
+              // Note: This example requires that you consent to location sharing when
+              // prompted by your browser. If you see the error "The Geolocation service
+              // failed.", it means you probably did not give permission for the browser to
+              // locate you.
+              var map, infoWindow;
+              function initMap() {
+                map = new google.maps.Map(
+                  document.getElementById('googleMap'),
+                  {
+                    center: {
+                      lat: -34.397,
+                      lng: 150.644
+                    },
+                    zoom: 6
+                  }
+                );
+                infoWindow = new google.maps.InfoWindow();
+                google.maps.event.addListener(map, 'click', function (event) {
+                  addMarker({
+                    coords: event.latLng
+                  });
+                });
+                // Try HTML5 geolocation.
+                if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition(
+                    function (position) {
+                      var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                      };
+                      infoWindow.setPosition(pos);
+                      infoWindow.setContent('Location found.');
+                      infoWindow.open(map);
+                      map.setCenter(pos);
+                    },
+                    function () {
+                      handleLocationError(true, infoWindow, map.getCenter());
                     }
                   );
-                  infoWindow = new google.maps.InfoWindow();
-                  google.maps.event.addListener(map, 'click', function(event) {
-                    addMarker({
-                      coords: event.latLng
-                    });
-                  });
-                  // Try HTML5 geolocation.
-                  if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(
-                      function(position) {
-                        var pos = {
-                          lat: position.coords.latitude,
-                          lng: position.coords.longitude
-                        };
-                        infoWindow.setPosition(pos);
-                        infoWindow.setContent('Location found.');
-                        infoWindow.open(map);
-                        map.setCenter(pos);
-                      },
-                      function() {
-                        handleLocationError(true, infoWindow, map.getCenter());
-                      }
-                    );
-                  } else {
-                    // Browser doesn't support Geolocation
-                    handleLocationError(false, infoWindow, map.getCenter());
-                  }
+                } else {
+                  // Browser doesn't support Geolocation
+                  handleLocationError(false, infoWindow, map.getCenter());
                 }
-                function handleLocationError(
-                  browserHasGeolocation,
-                  infoWindow,
-                  pos
-                ) {
-                  infoWindow.setPosition(pos);
-                  infoWindow.setContent(
-                    browserHasGeolocation
-                      ? 'Error: The Geolocation service failed.'
-                      : "Error: Your browser doesn't support geolocation."
-                  );
-                  infoWindow.open(map);
-                }
-              </script>
-              <script
-                async
-                defer
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAC2cAJA7U2M48ifiZpjMKRzrFNBYal9fc&callback=initMap"
-              ></script>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-12 text-center">
-          <div class="create-button-holder">
-            <div class="create-event-button">
-              <button
-                type="button"
-                class="btn btn-success center-block"
-                data-toggle="modal"
-                data-target="#create-event-index"
-              >
-                Create An Event
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- this is START back up table just in case card does not work -->
-
-      <div class="row">
-        <div class="col-lg-12">
-          <!-- Current Drunken Screw-->
-          <div class="card mb-4">
-            <div class="card-header">Current Drunkin Screw</div>
-            <div class="card-body">
-              <table class="table table-sm table-hover" id="new-event-listings">
-                <thead>
-                  <tr>
-                    <th scope="col" width="13%">Creator Name</th>
-                    <th scope="col" width="6%">Date</th>
-                    <th scope="col" width="3%">Time</th>
-                    <th scope="col" width="3%">Cost</th>
-                    <th scope="col" width="25%">Address</th>
-                    <th scope="col" width="45%" class="hide-column">
-                      Description
-                    </th>
-                    <th scope="col" width="2%">Join</th>
-                  </tr>
-                </thead>
-                <tbody class="table-body-text"></tbody>
-              </table>
-            </div>
+              }
+              function handleLocationError(
+                browserHasGeolocation,
+                infoWindow,
+                pos
+              ) {
+                infoWindow.setPosition(pos);
+                infoWindow.setContent(
+                  browserHasGeolocation
+                    ? 'Error: The Geolocation service failed.'
+                    : "Error: Your browser doesn't support geolocation."
+                );
+                infoWindow.open(map);
+              }
+            </script>
+            <script async defer
+              src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAC2cAJA7U2M48ifiZpjMKRzrFNBYal9fc&callback=initMap"></script>
           </div>
         </div>
       </div>
     </div>
-    <div class="footer">
-      <p>Footer</p>
+
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <div class="create-button-holder">
+          <div class="create-event-button">
+            <button type="button" class="btn btn-success center-block" data-toggle="modal"
+              data-target="#create-event-index">
+              Create An Event
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-    <link type="text/css" rel="stylesheet" href="assets/css/style.css" />
-  </body>
+    <!-- this is START back up table just in case card does not work -->
+
+
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- Current Drunken Screw-->
+        <div class="card mb-4">
+          <div class="card-header">Current Drunkin Screw</div>
+          <div class="card-body">
+            <table class="table table-sm table-hover" id="new-event-listings">
+              <thead>
+                <tr>
+                  <th scope="col" width="15%">Creator Name</th>
+                  <th scope="col" width="3%">Attendees</th>
+                  <th scope="col" width="5%">Date</th>
+                  <th scope="col" width="3%">Time</th>
+                  <th scope="col" width="3%">Cost</th>
+                  <th scope="col" width="25%">Address</th>
+                  <th scope="col" width="40%" class="hide-column">
+                    Description
+                  </th>
+                  <th scope="col" width="2%">Join</th>
+                </tr>
+              </thead>
+              <tbody class="table-body-text"></tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <p>Footer</p>
+  </div>
+  <link type="text/css" rel="stylesheet" href="assets/css/style.css" />
+</body>
+
 </html>
 
 <div class="event-card-holder"></div>
@@ -202,51 +194,27 @@
               </p>
             </div>
             <div class="form-group row">
-              <!-- <label for="event-date-input">Date:</label>
-              <input class="form-control" id="event-date-input" type="date" /> -->
-              <!-- Label to Test for different date input-->
-              <label for="start-input">Date (MM/DD/YYYY)</label>
-              <input
-                class="form-control"
-                id="event-date-input"
-                placeholder="05/08/2019"
-                type="text"
-              />
-              <!--END Label to Test for different date input-->
+
+              <label for="event-date-input">Date:</label>
+              <input class="form-control" placeholder="05/08/2019" id="event-date-input" type="text" />
+
               <label for="event-time-input">Time:</label>
               <input class="form-control" id="event-time-input" type="time" />
               <label for="event-number-input">Number of People:</label>
-              <input
-                class="form-control"
-                id="event-number-input"
-                type="number"
-              />
+              <input class="form-control" id="event-number-input" type="number" />
             </div>
             <div class="form-group row">
               <label for="event-address-input">Address:</label>
-              <input
-                class="form-control"
-                id="event-address-input"
-                type="address"
-              />
+              <input class="form-control" id="event-address-input" type="address" />
             </div>
             <div class="form-group row">
               <label for="event-description-input">Description?</label>
-              <textarea
-                class="form-control"
-                id="event-description-input"
-                rows="2"
-              ></textarea>
+              <textarea class="form-control" id="event-description-input" rows="2"></textarea>
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-default"
-            id="create-event"
-            data-dismiss="modal"
-          >
+          <button type="button" class="btn btn-default" id="create-event" data-dismiss="modal">
             Create Event
           </button>
         </div>
@@ -268,29 +236,16 @@
           <form role="form">
             <div class="form-group row">
               <label for="attendee-name-input">Attendee Name:</label>
-              <input
-                class="form-control"
-                id="attendee-name-input"
-                type="text"
-              />
+              <input class="form-control" id="attendee-name-input" type="text" />
             </div>
             <div class="form-group row">
               <label for="attendee-email-input">Attendee-email:</label>
-              <input
-                class="form-control"
-                id="attendee-email-input"
-                type="text"
-              />
+              <input class="form-control" id="attendee-email-input" type="text" />
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-default"
-            id="join-event"
-            data-dismiss="modal"
-          >
+          <button type="button" class="btn btn-default" id="join-event" data-dismiss="modal">
             Join Event
           </button>
         </div>
