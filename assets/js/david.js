@@ -13,7 +13,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 console.log(database);
 // 2. Button for adding Events - may need to change this to add different ids provided by tahir
-$('#create-event').on('click', function(event) {
+$('#create-event').on('click', function (event) {
   event.preventDefault();
 
   // Grabs user input
@@ -31,17 +31,18 @@ $('#create-event').on('click', function(event) {
     .val()
     .trim();
   var eventCost = $('#event-cost-input')
+    .val()
+    .trim();
 
-  // var eventNumber = $("#event-number-input")
-  //   .val()
-  //   .trim();
+  var eventNumber = $("#event-number-input")
+    .val()
+    .trim();
   // var eventdescription = $("#event-description-input")
   //   .val()
   //   .trim();
   // var eventCost = $("#event-cost-input")
-// >>>>>>> 18d8659648bfb781993dc349c8603030c27f6ca6
-    .val()
-    .trim();
+  // >>>>>>> 18d8659648bfb781993dc349c8603030c27f6ca6
+
   var eventDate = moment(
     $('#event-date-input')
       .val()
@@ -72,6 +73,7 @@ $('#create-event').on('click', function(event) {
   console.log(newEvent.date);
   console.log(newEvent.number);
   console.log(newEvent.description);
+  console.log(ID);
   console.log('event successfully added');
 
   // Clears all of the text-boxes
@@ -85,7 +87,7 @@ $('#create-event').on('click', function(event) {
 });
 
 // 3. Create Firebase event for pulling events from the database and a row in the html when a user adds an entry
-database.ref().on('child_added', function(childSnapshot) {
+database.ref().on('child_added', function (childSnapshot) {
   console.log(childSnapshot.val());
 
   // Store everything into a variable.
@@ -124,41 +126,41 @@ database.ref().on('child_added', function(childSnapshot) {
   // Append the new row to the table
   $('#new-event-listings > tbody').prepend(newRow);
 
-  
+
 });
 
-  // $("#creator-name-input").val("");
-  // $("#event-address-input").val("");
-  // $("#event-date-input").val("");
-  // $("#event-time-input").val("");
-  // $("#event-cost-input").val("");
-  // $("#event-number-input").val("");
-  // $("#event-description-input").val("");
+// $("#creator-name-input").val("");
+// $("#event-address-input").val("");
+// $("#event-date-input").val("");
+// $("#event-time-input").val("");
+// $("#event-cost-input").val("");
+// $("#event-number-input").val("");
+// $("#event-description-input").val("");
 
 
-  // 3. Create Firebase event for pulling events from the database and a row in the html when a user adds an entry
-  // database.ref().on("child_added", function (childSnapshot) {
-  //   console.log(childSnapshot.val());
+// 3. Create Firebase event for pulling events from the database and a row in the html when a user adds an entry
+// database.ref().on("child_added", function (childSnapshot) {
+//   console.log(childSnapshot.val());
 
-  //   // Store everything into a variable.
-  //   var creatorName = childSnapshot.val().name;
-  //   var eventAddress = childSnapshot.val().address;
-  //   var eventTime = childSnapshot.val().time;
-  //   var eventNumber = childSnapshot.val().number;
-  //   var eventdescription = childSnapshot.val().description;
-  //   var eventCost = childSnapshot.val().cost;
-  //   var eventDate = childSnapshot.val().date;
+//   // Store everything into a variable.
+//   var creatorName = childSnapshot.val().name;
+//   var eventAddress = childSnapshot.val().address;
+//   var eventTime = childSnapshot.val().time;
+//   var eventNumber = childSnapshot.val().number;
+//   var eventdescription = childSnapshot.val().description;
+//   var eventCost = childSnapshot.val().cost;
+//   var eventDate = childSnapshot.val().date;
 
-  //   // event Info
-  //   console.log(creatorName);
-  //   console.log(eventAddress);
-  //   console.log(eventTime);
-  //   console.log(eventNumber);
-  //   console.log(eventdescription);
-  //   console.log(eventCost);
-  //   console.log(eventDate);
-  //   console.log(ID);
-  // });
+//   // event Info
+//   console.log(creatorName);
+//   console.log(eventAddress);
+//   console.log(eventTime);
+//   console.log(eventNumber);
+//   console.log(eventdescription);
+//   console.log(eventCost);
+//   console.log(eventDate);
+//   console.log(ID);
+// });
 
 // });
 
@@ -178,6 +180,7 @@ $("#join-event").on("click", function (event) {
     attendeeName: attendeeName,
     attendeeEmailAddress: attendeeEmailAddress,
   };
+});
 
   // Uploads event data to the database
   // var newPostRef = database.ref().push(newEvent);
