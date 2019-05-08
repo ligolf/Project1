@@ -36,8 +36,6 @@
             Drunkin Crawl Locations
           </div>
           <div class="card-body">
-            <!-- <div class="map-holder">
-                            <img src="assets/images/map.png" alt="location map" class="mapimage" /> -->
             <div id="googleMap" style="width:100%;height:400px;"></div>
             <script>
               // Note: This example requires that you consent to location sharing when
@@ -46,32 +44,37 @@
               // locate you.
               var map, infoWindow;
               function initMap() {
-                map = new google.maps.Map(
-                  document.getElementById('googleMap'),
-                  {
-                    center: {
-                      lat: 34.052234,
-                      lng: -118.243685
-                    },
-                    zoom: 9
-                  }
-                );
 
                 var geocoder = new google.maps.Geocoder();
-                var address = "18739 hatteras st #56 Tarzana, CA 91356";
+                var address = "1010 s westwood blvd, westwood, CA";
 
                 geocoder.geocode({ 'address': address }, function (results, status) {
 
                   if (status == google.maps.GeocoderStatus.OK) {
                     var latitude = results[0].geometry.location.lat();
                     var longitude = results[0].geometry.location.lng();
-                    alert(latitude + ", " + longitude);
+                    // alert(latitude + ", " + longitude);
 
                   }
+                  // var myLatlng = new google.maps.LatLng(parseFloat(results.geo.lat), parseFloat(results.geo.lon));
+                  var dot = { lat: latitude, lng: longitude };
+
+                  map = new google.maps.Map(
+                    document.getElementById('googleMap'),
+                    {
+                      center: {
+                        lat: 34.052234,
+                        lng: -118.243685
+                      },
+                      zoom: 9
+                    }
+                  );
+
+
                   var marker = new google.maps.Marker({
-                    position: address,
+                    position: dot,
                     map: map,
-                    title: 'Uluru (Ayers Rock)'
+
                   });
                   marker.addListener('click', function () {
                     infowindow.open(map, marker);
@@ -95,10 +98,10 @@
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                       };
-                      infoWindow.setPosition(pos);
-                      infoWindow.setContent('Location found.');
-                      infoWindow.open(map);
-                      map.setCenter(pos);
+                      // infoWindow.setPosition(pos);
+                      // infoWindow.setContent('Location found.');
+                      // infoWindow.open(map);
+                      // map.setCenter(pos);
                     },
                     function () {
                       handleLocationError(true, infoWindow, map.getCenter());
