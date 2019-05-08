@@ -73,8 +73,9 @@ $('#create-event').on('click', function (event) {
   console.log("cost:" + newEvent.cost);
   console.log("date:" + newEvent.date);
   console.log("number:" + newEvent.number);
+  console.log("ID:" + ID)
   console.log("description:" + newEvent.description);
-  console.log("ID:" + ID);
+
 
   console.log('event successfully added');
 
@@ -116,10 +117,9 @@ database.ref().on('child_added', function (childSnapshot) {
   console.log(eventAddressOutput);
   console.log(eventTimeOutput);
   console.log(eventdescriptionOutput);
-  console.log(eventDatePrettyOutput)
+  console.log(eventDatePrettyOutput);
   console.log(eventCostOutput);
 
-  console.log(eventDatePrettyOutput);
 
   // Create the new row
   var newRow = $('<tr>').append(
@@ -151,19 +151,20 @@ $('#join-event').on('click', function (event) {
     .val()
     .trim();
 
-  var newEvent = {
+  var joinEvent = {
     attendees_name: attendeesName,
     attendees_email: attendeesEmail
   };
 
   // Uploads event data to the database
-  database.ref().push(newEvent);
+  database.ref().push(joinEvent);
 
   // Logs everything to console
-  console.log(newEvent.attendees_name);
-  console.log(newEvent.attendees_email);
-  console.log(postId);
+  console.log(joinEvent.attendees_name);
+  console.log(joinEvent.attendees_email);
+  // console.log(postId);
   console.log('attendee successfully added');
+
 
   // Clears all of the text-boxes
 
