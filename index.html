@@ -39,21 +39,21 @@
             <div id="googleMap" style="width:100%;height:400px;"></div>
             <script>
               // Note: This example requires that you consent to location sharing when
-              // prompted by your browser. If you see the error "The Geolocation service
+              // prompted by your browser.If you see the error "The Geolocation service
               // failed.", it means you probably did not give permission for the browser to
               // locate you.
               var map, infoWindow;
               function initMap() {
 
                 var geocoder = new google.maps.Geocoder();
-                var address = "1010 s westwood blvd, westwood, CA";
+                var address = eventAddressOutput;
 
                 geocoder.geocode({ 'address': address }, function (results, status) {
 
                   if (status == google.maps.GeocoderStatus.OK) {
                     var latitude = results[0].geometry.location.lat();
                     var longitude = results[0].geometry.location.lng();
-                    // alert(latitude + ", " + longitude);
+                    alert(latitude + ", " + longitude);
 
                   }
                   // var myLatlng = new google.maps.LatLng(parseFloat(results.geo.lat), parseFloat(results.geo.lon));
@@ -90,7 +90,7 @@
                 });
 
 
-                // Try HTML5 geolocation.
+                //   // Try HTML5 geolocation.
                 if (navigator.geolocation) {
                   navigator.geolocation.getCurrentPosition(
                     function (position) {
