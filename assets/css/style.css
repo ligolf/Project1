@@ -166,12 +166,15 @@ tbody {
     content: 'Cost:';
   }
   td:nth-of-type(5):before {
-    content: 'Address:';
+    content: 'Attendess:';
   }
   td:nth-of-type(6):before {
-    content: 'Description:';
+    content: 'Address:';
   }
   td:nth-of-type(7):before {
+    content: 'Description:';
+  }
+  td:nth-of-type(8):before {
     content: '';
   }
 
