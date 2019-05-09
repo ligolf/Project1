@@ -11,12 +11,12 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
   <link rel="stylesheet" href="assets/css/style.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
   <!-- Firebase Reference -->
   <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase.js"></script>
-
+  <script src="assets/js/tahir.js"></script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAC2cAJA7U2M48ifiZpjMKRzrFNBYal9fc&callback=initMap"></script>
   <!-- Moment.js Reference -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
   <style>
@@ -36,111 +36,135 @@
             Drunkin Crawl Locations
           </div>
           <div class="card-body">
-            <div id="googleMap" style="width:100%;height:400px;"></div>
+            <div id="googleMap" style="width:100%;height:400px;">
+
+              <!-- <script>
+                function initMap() {
+
+                };
+              </script> -->
+
+            </div>
+
+
+
             <script>
+
+              // var config = {
+              //   apiKey: 'AIzaSyAsL6rDw82BhQ0o3iK4fTFTPwj8p0Elxdw',
+              //   authDomain: 'project1-drunknscrew.firebaseapp.com',
+              //   databaseURL: 'https://project1-drunknscrew.firebaseio.com',
+              //   projectId: 'project1-drunknscrew',
+              //   storageBucket: 'project1-drunknscrew.appspot.com',
+              //   messagingSenderId: '560380639013'
+              // };
+
+              // firebase.initializeApp(config);
+
+              // var database = firebase.database();
+              // console.log(database);
               // Note: This example requires that you consent to location sharing when
               // prompted by your browser. If you see the error "The Geolocation service
               // failed.", it means you probably did not give permission for the browser to
               // locate you.
-              var map, infoWindow;
-              function initMap() {
+              // var map, infoWindow;
+              // function initMap() {
 
-                var geocoder = new google.maps.Geocoder();
+              //   var geocoder = new google.maps.Geocoder();
 
-                var address = "8736 wilshire blvd.  los angeles, CA";
+              //   var address = "1010 S westwood Blvd.  Los Angeles, CA";
 
-                geocoder.geocode({ 'address': address }, function (results, status) {
+              //   geocoder.geocode({ 'address': address }, function (results, status) {
 
-                  if (status == google.maps.GeocoderStatus.OK) {
-                    var latitude = results[0].geometry.location.lat();
-                    var longitude = results[0].geometry.location.lng();
-                    alert(latitude + ", " + longitude);
+              //     if (status == google.maps.GeocoderStatus.OK) {
+              //       var latitude = results[0].geometry.location.lat();
+              //       var longitude = results[0].geometry.location.lng();
+              //       // alert(latitude + ", " + longitude);
 
-                  }
+              //     }
 
-                  var dot = { lat: latitude, lng: longitude };
+              //     var dot = { lat: latitude, lng: longitude };
 
-                  map = new google.maps.Map(
-                    document.getElementById('googleMap'),
-                    {
-                      center: {
-                        lat: 34.052234,
-                        lng: -118.243685
-                      },
-                      zoom: 9
-                    }
-                  );
-                  var marker = new google.maps.Marker({
-                    position: dot,
-                    map: map,
+              //     map = new google.maps.Map(
+              //       document.getElementById('googleMap'),
+              //       {
+              //         center: {
+              //           lat: 34.052234,
+              //           lng: -118.243685
+              //         },
+              //         zoom: 9
+              //       }
+              //     );
+              //     var marker = new google.maps.Marker({
+              //       position: dot,
+              //       map: map,
 
-                  });
-
-
-
-                  marker.addListener('click', function () {
-                    infowindow.open(map, marker);
-                  });
-                });
-
-
-                infoWindow = new google.maps.InfoWindow();
-
-                // for (var i = 0; i < dot.length; i++) {
-
-
-                // }
-                // var contentString = eventDescriptionsOutput[i];
+              //     });
 
 
 
-                // google.maps.event.addListener(marker, 'click', function (marker, event) {
-                //   addMarker({
-                //     coords: (dot[i])
-                //   });
-                // });
+              //     marker.addListener('click', function () {
+              //       infowindow.open(map, marker);
+              //     });
+              //   });
 
 
-                //     // Try HTML5 geolocation.
-                if (navigator.geolocation) {
-                  navigator.geolocation.getCurrentPosition(
-                    function (position) {
-                      var pos = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                      };
-                      infoWindow.setPosition(pos);
-                      infoWindow.setContent('Location found.');
-                      infoWindow.open(map);
-                      map.setCenter(pos);
-                    },
-                    function () {
-                      handleLocationError(true, infoWindow, map.getCenter());
-                    }
-                  );
-                } else {
-                  // Browser doesn't support Geolocation
-                  handleLocationError(false, infoWindow, map.getCenter());
-                }
-                // }
-                function handleLocationError(
-                  browserHasGeolocation,
-                  infoWindow,
-                  pos
-                ) {
-                  infoWindow.setPosition(pos);
-                  infoWindow.setContent(
-                    browserHasGeolocation
-                      ? 'Error: The Geolocation service failed.'
-                      : "Error: Your browser doesn't support geolocation."
-                  );
-                  infoWindow.open(map);
-                }
-              };
+              //   infoWindow = new google.maps.InfoWindow();
+
+              //   // for (var i = 0; i < dot.length; i++) {
+
+
+              //   // }
+
+
+
+
+              //   // google.maps.event.addListener(marker, 'click', function (marker, event) {
+              //   //   addMarker({
+              //   //     coords: (dot[i])
+              //   //   });
+              //   // });
+
+
+              //   // Try HTML5 geolocation.
+              //   if (navigator.geolocation) {
+              //     navigator.geolocation.getCurrentPosition(
+              //       function (position) {
+              //         var pos = {
+              //           lat: position.coords.latitude,
+              //           lng: position.coords.longitude
+              //         };
+              //         infoWindow.setPosition(pos);
+              //         infoWindow.setContent('Location found.');
+              //         infoWindow.open(map);
+              //         map.setCenter(pos);
+              //       },
+              //       function () {
+              //         handleLocationError(true, infoWindow, map.getCenter());
+              //       }
+              //     );
+              //   } else {
+              //     // Browser doesn't support Geolocation
+              //     handleLocationError(false, infoWindow, map.getCenter());
+              //   }
+              //   // }
+              //   function handleLocationError(
+              //     browserHasGeolocation,
+              //     infoWindow,
+              //     pos
+              //   ) {
+              //     infoWindow.setPosition(pos);
+              //     infoWindow.setContent(
+              //       browserHasGeolocation
+              //         ? 'Error: The Geolocation service failed.'
+              //         : "Error: Your browser doesn't support geolocation."
+              //     );
+              //     infoWindow.open(map);
+              //   }
+              // };
 
             </script>
-            <script async defer
-              src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAC2cAJA7U2M48ifiZpjMKRzrFNBYal9fc&callback=initMap"></script>
+
           </div>
         </div>
       </div>
@@ -286,7 +310,7 @@
                 </button>
               </div>
             </div>
-            <script src="assets/js/tahir.js"></script>
+
           </div>
 
           <!-- <script src="assets/js/david.js"></script> -->
