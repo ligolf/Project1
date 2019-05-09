@@ -99,7 +99,6 @@ database.ref().on('child_added', function (childSnapshot) {
   var eventTimeOutput = childSnapshot.val().time;
   var eventdescriptionOutput = childSnapshot.val().description;
 
-
   // eventdescriptionOutput.attr('class', 'hide-column');
   var eventCostOutput = childSnapshot.val().cost;
   var eventDateOutput = childSnapshot.val().date;
@@ -168,84 +167,138 @@ $('#join-event').on('click', function (event) {
 
   $('#attendee-name-input').val('');
   $('#attendee-email-input').val('');
-});
+})
+
+
 
 // moved map script from html page to js page.
 
-// var mapstyle = $("#googleMap")
+// function initialize() {
+//   var infowindow = new google.maps.InfoWindow();
+//   var map = new google.maps.Map(
+//     document.getElementById("map_canvas"), {
+//       center: new google.maps.LatLng(37.4419, -122.1419),
+//       zoom: 13,
+//       mapTypeId: google.maps.MapTypeId.ROADMAP
+//     });
+
+
+  //Create a node at firebase location to add locations as child keys
+//   var locationsRef = firebase.database().ref("eventAddressOutput");
+
+//   var geocoder = new google.maps.Geocoder();
+
+//   // var address = "8736 wilshire blvd.  los angeles, CA";
+
+//   geocoder.geocode({ 'address': locationsRef }, function (results, status) {
+
+//     if (status == google.maps.GeocoderStatus.OK) {
+//       var latitude = results[0].geometry.location.lat();
+//       var longitude = results[0].geometry.location.lng();
+//       alert(latitude + ", " + longitude);
+
+//     }
+//   });
+// };
+
+  // var dot = { lat: latitude, lng: longitude };
+//   var bounds = new google.maps.LatLngBounds();
+//   locationsRef.on('child', function (snapshot) {
+//     console.log(snapshot)
+//     var data = snapshot.val();
+//     console.log(data);
+//     var marker = new google.maps.Marker({
+//       position: {
+//         lat: latitude,
+//         lng: longitude
+//       },
+//       map: map
+//     });
+//     bounds.extend(marker.getPosition());
+//     marker.addListener('click', (function (data) {
+//       return function (e) {
+//         infowindow.setContent(this.getPosition().toUrlValue(6) + "<br>" + data.User.g);
+//         infowindow.open(map, this);
+//       }
+//     }(data)));
+//     map.fitBounds(bounds);
+//   });
+// }
+// google.maps.event.addDomListener(window, "load", initialize);
+
 
 // src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAC2cAJA7U2M48ifiZpjMKRzrFNBYal9fc&callback=initMap"
 
 // var map, infoWindow;
 // function initMap() {
 
-//   var geocoder = new google.maps.Geocoder();
-//   var address = eventAddressOutput;
+  // var geocoder = new google.maps.Geocoder();
+  // var address = eventAddressOutput;
 
-//   geocoder.geocode({ 'address': address }, function (results, status) {
+  // geocoder.geocode({ 'address': address }, function (results, status) {
 
-//     if (status == google.maps.GeocoderStatus.OK) {
-//       var latitude = results[0].geometry.location.lat();
-//       var longitude = results[0].geometry.location.lng();
-//       // alert(latitude + ", " + longitude);
+  //   if (status == google.maps.GeocoderStatus.OK) {
+  //     var latitude = results[0].geometry.location.lat();
+  //     var longitude = results[0].geometry.location.lng();
+  //     // alert(latitude + ", " + longitude);
 
-//     }
-//     // var myLatlng = new google.maps.LatLng(parseFloat(results.geo.lat), parseFloat(results.geo.lon));
-//     var dot = { lat: latitude, lng: longitude };
+  //   }
+  //   // var myLatlng = new google.maps.LatLng(parseFloat(results.geo.lat), parseFloat(results.geo.lon));
+  //   var dot = { lat: latitude, lng: longitude };
 
-//     map = new google.maps.Map(
-//       document.getElementById('googleMap'),
-//       {
-//         center: {
-//           lat: 34.052234,
-//           lng: -118.243685
-//         },
-//         zoom: 9
-//       }
-//     );
-
-
-//     var marker = new google.maps.Marker({
-//       position: dot,
-//       map: map,
-
-//     });
-//     marker.addListener('click', function () {
-//       infowindow.open(map, marker);
-//     });
-//   });
+  //   map = new google.maps.Map(
+  //     document.getElementById('googleMap'),
+  //     {
+  //       center: {
+  //         lat: 34.052234,
+  //         lng: -118.243685
+  //       },
+  //       zoom: 9
+  //     }
+  //   );
 
 
-//   infoWindow = new google.maps.InfoWindow();
-//   google.maps.event.addListener(map, 'click', function (event) {
-//     addMarker({
-//       coords: (latitude + " " + longitude)
-//     });
-//   });
+  //   var marker = new google.maps.Marker({
+  //     position: dot,
+  //     map: map,
+
+  //   });
+  //   marker.addListener('click', function () {
+  //     infowindow.open(map, marker);
+  //   });
+  // });
 
 
-//   // Try HTML5 geolocation.
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(
-//       function (position) {
-//         var pos = {
-//           lat: position.coords.latitude,
-//           lng: position.coords.longitude
-//         };
-//         infoWindow.setPosition(pos);
-//         infoWindow.setContent('Location found.');
-//         infoWindow.open(map);
-//         map.setCenter(pos);
-//       },
-//       function () {
-//         handleLocationError(true, infoWindow, map.getCenter());
-//       }
-//     );
-//   } else {
-//     // Browser doesn't support Geolocation
-//     handleLocationError(false, infoWindow, map.getCenter());
-//   }
-// }
+  // infoWindow = new google.maps.InfoWindow();
+  // google.maps.event.addListener(map, 'click', function (event) {
+  //   addMarker({
+  //     coords: (latitude + " " + longitude)
+  //   });
+  // });
+
+
+  // Try HTML5 geolocation.
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       function (position) {
+  //         var pos = {
+  //           lat: position.coords.latitude,
+  //           lng: position.coords.longitude
+  //         };
+  //         infoWindow.setPosition(pos);
+  //         infoWindow.setContent('Location found.');
+  //         infoWindow.open(map);
+  //         map.setCenter(pos);
+  //       },
+  //       function () {
+  //         handleLocationError(true, infoWindow, map.getCenter());
+  //       }
+  //     );
+  //   } else {
+  //     // Browser doesn't support Geolocation
+  //     handleLocationError(false, infoWindow, map.getCenter());
+  //   }
+
 // function handleLocationError(
 //   browserHasGeolocation,
 //   infoWindow,
@@ -259,74 +312,3 @@ $('#join-event').on('click', function (event) {
 //   );
 //   infoWindow.open(map);
 // }
-
-// const mapStyle = [
-//   {
-//     elementType: 'geometry',
-//     stylers: [
-//       {
-//         color: '#eceff1'
-//       }
-//     ]
-//   },
-//   {
-//     elementType: 'labels',
-//     stylers: [
-//       {
-//         visibility: 'off'
-//       }
-//     ]
-//   },
-//   {
-//     featureType: 'administrative',
-//     elementType: 'labels',
-//     stylers: [
-//       {
-//         visibility: 'on'
-//       }
-//     ]
-//   },
-//   {
-//     featureType: 'road',
-//     elementType: 'geometry',
-//     stylers: [
-//       {
-//         color: '#cfd8dc'
-//       }
-//     ]
-//   },
-//   {
-//     featureType: 'road',
-//     elementType: 'geometry.stroke',
-//     stylers: [
-//       {
-//         visibility: 'off'
-//       }
-//     ]
-//   },
-//   {
-//     featureType: 'road.local',
-//     stylers: [
-//       {
-//         visibility: 'off'
-//       }
-//     ]
-//   },
-//   {
-//     featureType: 'water',
-//     stylers: [
-//       {
-//         color: '#b0bec5'
-//       }
-//     ]
-//   }
-// ];
-
-// function initMap() {
-//   const map = new google.maps.Map(document.getElementById('map'), {
-//     center: { lat: 37.4268042, lng: -122.0828066 },
-//     zoom: 13,
-//     styles: mapStyle
-//   });
-// }
-
