@@ -139,12 +139,22 @@ $(document).ready(function () {
     // Append the new row to the table
     $('#new-event-listings > tbody').prepend(newRow);
 
-
-    // console.log(eventAddressOutput);
-    var allAddresses = [];
     allAddresses.push(eventAddressOutput);
     console.log(allAddresses);
-    function initMap(allAddresses) { };
+
+    for (i = 0; i < eventAddressOutput.length; i++) {
+
+
+
+
+
+    }
+
+    window.allAddresses;
+
+    // }
+
+
 
   });
 
@@ -185,119 +195,104 @@ $(document).ready(function () {
     $('#attendee-email-input').val('');
 
 
-  })
+  });
+
+});
+
+var myJSON = JSON.stringify(allAddresses);
+// creating an array outside of the functions to pass informstion between the functions
+var allAddresses = [];
+console.log(allAddresses);
+
+// google map time
 
 
-  // google map time
-
-  // var tag = document.createElement('script');
-  // tag.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAC2cAJA7U2M48ifiZpjMKRzrFNBYal9fc&callback=initMap";
-  // tag.defer = true;
-  // var firstScriptTag = document.getElementsByTagName('script')[0];
-  // firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-  // moved map script from html page to js page.
-  // src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAC2cAJA7U2M48ifiZpjMKRzrFNBYal9fc&callback=initMap";
+function initMap(allAddresses) {
 
 
   // console.log(allAddresses);
 
-});
 
+  // $((indAddresses) => {
+  //   initMap = function () {
+  var map, infoWindow;
 
-$((allAddresses) => {
-  initMap = function () {
-    var map, infoWindow;
-    // console.log(allAddresses);
-    var geocoder = new google.maps.Geocoder();
+  var geocoder = new google.maps.Geocoder();
 
-    var address = '123 Elm Street Los Angeles CA';
+  var address = '123 Elm Street Los Angeles CA';
 
-    // console.log(typeof eventAddressOutput)
-    geocoder.geocode({ 'address': address }, function (results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        var latitude = results[0].geometry.location.lat();
-        var longitude = results[0].geometry.location.lng();
-        // alert(latitude + ", " + longitude);
+  // console.log(typeof eventAddressOutput)
+  geocoder.geocode({ 'address': address }, function (results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      var latitude = results[0].geometry.location.lat();
+      var longitude = results[0].geometry.location.lng();
+      // alert(latitude + ", " + longitude);
 
+    }
+
+    var dot = { lat: latitude, lng: longitude };
+
+    map = new google.maps.Map(
+      document.getElementById('googleMap'),
+      {
+        center: {
+          lat: 34.052234,
+          lng: -118.243685
+        },
+        zoom: 9
       }
+    );
+    var marker = new google.maps.Marker({
+      position: dot,
+      map: map,
 
-      var dot = { lat: latitude, lng: longitude };
-
-      map = new google.maps.Map(
-        document.getElementById('googleMap'),
-        {
-          center: {
-            lat: 34.052234,
-            lng: -118.243685
-          },
-          zoom: 9
-        }
-      );
-      var marker = new google.maps.Marker({
-        position: dot,
-        map: map,
-
-      });
-
-
-
-      marker.addListener('click', function () {
-        infowindow.open(map, marker);
-      });
     });
 
-
-    infoWindow = new google.maps.InfoWindow();
-
-    // for (var i = 0; i < dot.length; i++) {
-
-    // }
-
-    // google.maps.event.addListener(marker, 'click', function (marker, event) {
-    //   addMarker({
-    //     coords: (dot[i])
-    //   });
-    // });
+    marker.addListener('click', function () {
+      infowindow.open(map, marker);
+    });
+  });
 
 
-    // Try HTML5 geolocation.
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        function (position) {
-          var pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          };
-          infoWindow.setPosition(pos);
-          infoWindow.setContent('Location found.');
-          infoWindow.open(map);
-          map.setCenter(pos);
-        },
-        function () {
-          handleLocationError(true, infoWindow, map.getCenter());
-        }
-      );
-    } else {
-      // Browser doesn't support Geolocation
-      handleLocationError(false, infoWindow, map.getCenter());
-    }
-    // }
-    function handleLocationError(
-      browserHasGeolocation,
-      infoWindow,
-      pos
-    ) {
-      infoWindow.setPosition(pos);
-      infoWindow.setContent(
-        browserHasGeolocation
-          ? 'Error: The Geolocation service failed.'
-          : "Error: Your browser doesn't support geolocation."
-      );
-      infoWindow.open(map);
-    }
+  infoWindow = new google.maps.InfoWindow();
+
+  // Try HTML5 geolocation.
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        infoWindow.setPosition(pos);
+        infoWindow.setContent('Location found.');
+        infoWindow.open(map);
+        map.setCenter(pos);
+      },
+      function () {
+        handleLocationError(true, infoWindow, map.getCenter());
+      }
+    );
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
   }
-})
+  // }
+  function handleLocationError(
+    browserHasGeolocation,
+    infoWindow,
+    pos
+  ) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(
+      browserHasGeolocation
+        ? 'Error: The Geolocation service failed.'
+        : "Error: Your browser doesn't support geolocation."
+    );
+    infoWindow.open(map);
+  }
+}
+
 
 
 
