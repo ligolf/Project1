@@ -140,21 +140,8 @@ $(document).ready(function () {
     $('#new-event-listings > tbody').prepend(newRow);
 
     allAddresses.push(eventAddressOutput);
-    console.log(allAddresses);
-
-    for (i = 0; i < eventAddressOutput.length; i++) {
-
-
-
-
-
-    }
 
     window.allAddresses;
-
-    // }
-
-
 
   });
 
@@ -199,18 +186,17 @@ $(document).ready(function () {
 
 });
 
-var myJSON = JSON.stringify(allAddresses);
+
 // creating an array outside of the functions to pass informstion between the functions
 var allAddresses = [];
-console.log(allAddresses);
+var myJSON = JSON.stringify(allAddresses);
+// console.log(allAddresses);
 
 // google map time
 
 
-function initMap(allAddresses) {
+function initMap() {
 
-
-  // console.log(allAddresses);
 
 
   // $((indAddresses) => {
@@ -219,9 +205,12 @@ function initMap(allAddresses) {
 
   var geocoder = new google.maps.Geocoder();
 
-  var address = '123 Elm Street Los Angeles CA';
+  console.log(allAddresses);
+
+  var address = "1287 san vicente blvd. los angeles, CA";
 
   // console.log(typeof eventAddressOutput)
+
   geocoder.geocode({ 'address': address }, function (results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
       var latitude = results[0].geometry.location.lat();
