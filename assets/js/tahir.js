@@ -12,7 +12,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 console.log(database);
 
-$('#create-event').on('click', function (event) {
+$('#create-event').on('click', function(event) {
   event.preventDefault();
 
   // Grabs user input
@@ -67,15 +67,14 @@ $('#create-event').on('click', function (event) {
   var ID = newPostRef.key;
 
   // Logs everything to console
-  console.log("name:" + newEvent.name);
-  console.log("address:" + newEvent.address);
-  console.log("time:" + newEvent.time);
-  console.log("cost:" + newEvent.cost);
-  console.log("date:" + newEvent.date);
-  console.log("number:" + newEvent.number);
-  console.log("ID:" + ID)
-  console.log("description:" + newEvent.description);
-
+  console.log('name:' + newEvent.name);
+  console.log('address:' + newEvent.address);
+  console.log('time:' + newEvent.time);
+  console.log('cost:' + newEvent.cost);
+  console.log('date:' + newEvent.date);
+  console.log('number:' + newEvent.number);
+  console.log('ID:' + ID);
+  console.log('description:' + newEvent.description);
 
   console.log('event successfully added');
 
@@ -89,7 +88,7 @@ $('#create-event').on('click', function (event) {
   $('#event-description-input').val('');
 });
 
-database.ref().on('child_added', function (childSnapshot) {
+database.ref().on('child_added', function(childSnapshot) {
   console.log(childSnapshot.val());
 
   // Store everything into a variable.
@@ -119,7 +118,6 @@ database.ref().on('child_added', function (childSnapshot) {
   console.log(eventDatePrettyOutput);
   console.log(eventCostOutput);
 
-
   // Create the new row
   var newRow = $('<tr>').append(
     $('<td class="px-2">').text(creatorNameOutput),
@@ -137,7 +135,7 @@ database.ref().on('child_added', function (childSnapshot) {
 });
 
 // listener for adding attendees
-$('#join-event').on('click', function (event) {
+$('#join-event').on('click', function(event) {
   event.preventDefault();
 
   // Grabs user input
@@ -162,14 +160,11 @@ $('#join-event').on('click', function (event) {
   // console.log(postId);
   console.log('attendee successfully added');
 
-
   // Clears all of the text-boxes
 
   $('#attendee-name-input').val('');
   $('#attendee-email-input').val('');
-})
-
-
+});
 
 // moved map script from html page to js page.
 
@@ -182,8 +177,7 @@ $('#join-event').on('click', function (event) {
 //       mapTypeId: google.maps.MapTypeId.ROADMAP
 //     });
 
-
-  //Create a node at firebase location to add locations as child keys
+//Create a node at firebase location to add locations as child keys
 //   var locationsRef = firebase.database().ref("eventAddressOutput");
 
 //   var geocoder = new google.maps.Geocoder();
@@ -201,7 +195,7 @@ $('#join-event').on('click', function (event) {
 //   });
 // };
 
-  // var dot = { lat: latitude, lng: longitude };
+// var dot = { lat: latitude, lng: longitude };
 //   var bounds = new google.maps.LatLngBounds();
 //   locationsRef.on('child', function (snapshot) {
 //     console.log(snapshot)
@@ -226,78 +220,74 @@ $('#join-event').on('click', function (event) {
 // }
 // google.maps.event.addDomListener(window, "load", initialize);
 
-
 // src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAC2cAJA7U2M48ifiZpjMKRzrFNBYal9fc&callback=initMap"
 
 // var map, infoWindow;
 // function initMap() {
 
-  // var geocoder = new google.maps.Geocoder();
-  // var address = eventAddressOutput;
+// var geocoder = new google.maps.Geocoder();
+// var address = eventAddressOutput;
 
-  // geocoder.geocode({ 'address': address }, function (results, status) {
+// geocoder.geocode({ 'address': address }, function (results, status) {
 
-  //   if (status == google.maps.GeocoderStatus.OK) {
-  //     var latitude = results[0].geometry.location.lat();
-  //     var longitude = results[0].geometry.location.lng();
-  //     // alert(latitude + ", " + longitude);
+//   if (status == google.maps.GeocoderStatus.OK) {
+//     var latitude = results[0].geometry.location.lat();
+//     var longitude = results[0].geometry.location.lng();
+//     // alert(latitude + ", " + longitude);
 
-  //   }
-  //   // var myLatlng = new google.maps.LatLng(parseFloat(results.geo.lat), parseFloat(results.geo.lon));
-  //   var dot = { lat: latitude, lng: longitude };
+//   }
+//   // var myLatlng = new google.maps.LatLng(parseFloat(results.geo.lat), parseFloat(results.geo.lon));
+//   var dot = { lat: latitude, lng: longitude };
 
-  //   map = new google.maps.Map(
-  //     document.getElementById('googleMap'),
-  //     {
-  //       center: {
-  //         lat: 34.052234,
-  //         lng: -118.243685
-  //       },
-  //       zoom: 9
-  //     }
-  //   );
+//   map = new google.maps.Map(
+//     document.getElementById('googleMap'),
+//     {
+//       center: {
+//         lat: 34.052234,
+//         lng: -118.243685
+//       },
+//       zoom: 9
+//     }
+//   );
 
+//   var marker = new google.maps.Marker({
+//     position: dot,
+//     map: map,
 
-  //   var marker = new google.maps.Marker({
-  //     position: dot,
-  //     map: map,
+//   });
+//   marker.addListener('click', function () {
+//     infowindow.open(map, marker);
+//   });
+// });
 
-  //   });
-  //   marker.addListener('click', function () {
-  //     infowindow.open(map, marker);
-  //   });
-  // });
+// infoWindow = new google.maps.InfoWindow();
+// google.maps.event.addListener(map, 'click', function (event) {
+//   addMarker({
+//     coords: (latitude + " " + longitude)
+//   });
+// });
 
-
-  // infoWindow = new google.maps.InfoWindow();
-  // google.maps.event.addListener(map, 'click', function (event) {
-  //   addMarker({
-  //     coords: (latitude + " " + longitude)
-  //   });
-  // });
-
-
-  // Try HTML5 geolocation.
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition(
-  //       function (position) {
-  //         var pos = {
-  //           lat: position.coords.latitude,
-  //           lng: position.coords.longitude
-  //         };
-  //         infoWindow.setPosition(pos);
-  //         infoWindow.setContent('Location found.');
-  //         infoWindow.open(map);
-  //         map.setCenter(pos);
-  //       },
-  //       function () {
-  //         handleLocationError(true, infoWindow, map.getCenter());
-  //       }
-  //     );
-  //   } else {
-  //     // Browser doesn't support Geolocation
-  //     handleLocationError(false, infoWindow, map.getCenter());
-  //   }
+// Try HTML5 geolocation.
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(
+//       function (position) {
+//         var pos = {
+//           lat: position.coords.latitude,
+//           lng: position.coords.longitude
+//         };
+//         infoWindow.setPosition(pos);
+//         infoWindow.setContent('Location found.');
+//         infoWindow.open(map);
+//         map.setCenter(pos);
+//       },
+//       function () {
+//         handleLocationError(true, infoWindow, map.getCenter());
+//       }
+//     );
+//   } else {
+//     // Browser doesn't support Geolocation
+//     handleLocationError(false, infoWindow, map.getCenter());
+//   }
 
 // function handleLocationError(
 //   browserHasGeolocation,
