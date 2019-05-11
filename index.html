@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Drunken Crawl</title>
+  <title>Drunk n' Hammered</title>
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
@@ -16,7 +16,7 @@
   <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase.js"></script>
   <script src="assets/js/tahir.js"></script>
   <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAC2cAJA7U2M48ifiZpjMKRzrFNBYal9fc&callback=initMap"></script>
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAC2cAJA7U2M48ifiZpjMKRzrFNBYal9fc&callback=initMap&libraries=places"></script>
   <!-- Moment.js Reference -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
   <style>
@@ -33,137 +33,14 @@
       <div class="col-lg-12">
         <div class="card">
           <div class="card-header map-header">
-            Drunkin Crawl Locations
+            Drunk n' Hammered Locations
           </div>
+
+          <!-- this places the google map on the index.html page -->
           <div class="card-body">
             <div id="googleMap" style="width:100%;height:400px;">
 
-              <!-- <script>
-                function initMap() {
-
-                };
-              </script> -->
-
             </div>
-
-
-
-            <script>
-
-              // var config = {
-              //   apiKey: 'AIzaSyAsL6rDw82BhQ0o3iK4fTFTPwj8p0Elxdw',
-              //   authDomain: 'project1-drunknscrew.firebaseapp.com',
-              //   databaseURL: 'https://project1-drunknscrew.firebaseio.com',
-              //   projectId: 'project1-drunknscrew',
-              //   storageBucket: 'project1-drunknscrew.appspot.com',
-              //   messagingSenderId: '560380639013'
-              // };
-
-              // firebase.initializeApp(config);
-
-              // var database = firebase.database();
-              // console.log(database);
-              // Note: This example requires that you consent to location sharing when
-              // prompted by your browser. If you see the error "The Geolocation service
-              // failed.", it means you probably did not give permission for the browser to
-              // locate you.
-              // var map, infoWindow;
-              // function initMap() {
-
-              //   var geocoder = new google.maps.Geocoder();
-
-              //   var address = "1010 S westwood Blvd.  Los Angeles, CA";
-
-              //   geocoder.geocode({ 'address': address }, function (results, status) {
-
-              //     if (status == google.maps.GeocoderStatus.OK) {
-              //       var latitude = results[0].geometry.location.lat();
-              //       var longitude = results[0].geometry.location.lng();
-              //       // alert(latitude + ", " + longitude);
-
-              //     }
-
-              //     var dot = { lat: latitude, lng: longitude };
-
-              //     map = new google.maps.Map(
-              //       document.getElementById('googleMap'),
-              //       {
-              //         center: {
-              //           lat: 34.052234,
-              //           lng: -118.243685
-              //         },
-              //         zoom: 9
-              //       }
-              //     );
-              //     var marker = new google.maps.Marker({
-              //       position: dot,
-              //       map: map,
-
-              //     });
-
-
-
-              //     marker.addListener('click', function () {
-              //       infowindow.open(map, marker);
-              //     });
-              //   });
-
-
-              //   infoWindow = new google.maps.InfoWindow();
-
-              //   // for (var i = 0; i < dot.length; i++) {
-
-
-              //   // }
-
-
-
-
-              //   // google.maps.event.addListener(marker, 'click', function (marker, event) {
-              //   //   addMarker({
-              //   //     coords: (dot[i])
-              //   //   });
-              //   // });
-
-
-              //   // Try HTML5 geolocation.
-              //   if (navigator.geolocation) {
-              //     navigator.geolocation.getCurrentPosition(
-              //       function (position) {
-              //         var pos = {
-              //           lat: position.coords.latitude,
-              //           lng: position.coords.longitude
-              //         };
-              //         infoWindow.setPosition(pos);
-              //         infoWindow.setContent('Location found.');
-              //         infoWindow.open(map);
-              //         map.setCenter(pos);
-              //       },
-              //       function () {
-              //         handleLocationError(true, infoWindow, map.getCenter());
-              //       }
-              //     );
-              //   } else {
-              //     // Browser doesn't support Geolocation
-              //     handleLocationError(false, infoWindow, map.getCenter());
-              //   }
-              //   // }
-              //   function handleLocationError(
-              //     browserHasGeolocation,
-              //     infoWindow,
-              //     pos
-              //   ) {
-              //     infoWindow.setPosition(pos);
-              //     infoWindow.setContent(
-              //       browserHasGeolocation
-              //         ? 'Error: The Geolocation service failed.'
-              //         : "Error: Your browser doesn't support geolocation."
-              //     );
-              //     infoWindow.open(map);
-              //   }
-              // };
-
-            </script>
 
           </div>
         </div>
@@ -187,18 +64,18 @@
 
     <div class="row">
       <div class="col-lg-12">
-        <!-- Current Drunken Crawlw-->
+        <!-- Current Drunk n' Hammered-->
         <div class="card mb-4">
-          <div class="card-header">Current Drunkin Crawl</div>
+          <div class="card-header">Current Drunk n' Hammered</div>
           <div class="card-body">
             <table class="table table-sm table-hover" id="new-event-listings">
               <thead>
                 <tr>
                   <th scope="col" width="15%">Creator Name</th>
-                  <th scope="col" width="3%">Attendees</th>
                   <th scope="col" width="5%">Date</th>
                   <th scope="col" width="3%">Time</th>
                   <th scope="col" width="3%">Cost</th>
+                  <th scope="col" width="3%">Attendees</th>
                   <th scope="col" width="25%">Address</th>
                   <th scope="col" width="40%" class="hide-column">
                     Description
