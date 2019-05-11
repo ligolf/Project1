@@ -150,6 +150,7 @@ $(document).ready(function () {
     $('#new-event-listings > tbody').prepend(newRow);
 
     allAddresses.push(eventAddressOutput);
+    var myJSON = JSON.stringify(allAddresses);
 
     window.allAddresses;
 
@@ -256,12 +257,15 @@ $('#event-join').on('click', function(event) {
 // creating an array outside of the functions to pass informstion between the functions
 var allAddresses = [];
 var myJSON = JSON.stringify(allAddresses);
+
+
 // console.log(allAddresses);
 
 // google map time
 
 
 function initMap() {
+
 
 
 
@@ -292,15 +296,15 @@ function initMap() {
 
 // src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAC2cAJA7U2M48ifiZpjMKRzrFNBYal9fc&callback=initMap"
 
+
   // $((indAddresses) => {
   //   initMap = function () {
-  var map, infoWindow;
+  // var map, infoWindow;
 
-  var geocoder = new google.maps.Geocoder();
+  // var geocoder = new google.maps.Geocoder();
 
-  console.log(allAddresses);
 
-  var address = "1287 san vicente blvd. los angeles, CA";
+
 
 
 // var geocoder = new google.maps.Geocoder();
@@ -382,37 +386,79 @@ function initMap() {
 // }
 
  // console.log(typeof eventAddressOutput)
+  // for (i = 0; i < allAddresses.length; i++) {
 
-  geocoder.geocode({ 'address': address }, function (results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
-      var latitude = results[0].geometry.location.lat();
-      var longitude = results[0].geometry.location.lng();
-      // alert(latitude + ", " + longitude);
 
-    }
 
-    var dot = { lat: latitude, lng: longitude };
+  // var address1 = eventAddressOutput2;
 
-    map = new google.maps.Map(
-      document.getElementById('googleMap'),
-      {
-        center: {
-          lat: 34.052234,
-          lng: -118.243685
-        },
-        zoom: 9
-      }
-    );
-    var marker = new google.maps.Marker({
-      position: dot,
-      map: map,
+  // var address = "1284 sepulveda Blvd, Los Angeles, CA";
 
-    });
+  // // console.log(typeof eventAddressOutput)
 
-    marker.addListener('click', function () {
-      infowindow.open(map, marker);
-    });
+  // geocoder.geocode({ 'address': address }, function (results, status) {
+  //   if (status == google.maps.GeocoderStatus.OK) {
+  //     var latitude = results[0].geometry.location.lat();
+  //     var longitude = results[0].geometry.location.lng();
+  //     // alert(latitude + ", " + longitude);
+
+  //   }
+
+  //   var dot = { lat: latitude, lng: longitude };
+
+  //   map = new google.maps.Map(
+  //     document.getElementById('googleMap'),
+  //     {
+  //       center: {
+  //         lat: 34.052234,
+  //         lng: -118.243685
+  //       },
+  //       zoom: 9
+  //     }
+  //   );
+
+
+  // var marker = new google.maps.Marker({
+  //   position: dot,
+  //   map: map,
+
+  // });
+
+
+  // marker.addListener('click', function () {
+  //   infowindow.open(map, marker);
+  // });
+
+  console.log(allAddresses);
+
+  var map = new google.maps.Map(document.getElementById('googleMap'), {
+    zoom: 10,
+    center: new google.maps.LatLng(34.1123, -118.28494),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
   });
+
+  var infowindow = new google.maps.InfoWindow;
+
+  var marker, i;
+
+  for (i = 0; i < allAddresses.length; i++) {
+    marker = new google.maps.Marker({
+      position: new google.maps.LatLng(allAddresses[i][1], allAddresses[i][2]),
+      map: map
+    });
+    console.log(typeof allAddresses);
+    google.maps.event.addListener(marker, 'click', (function (marker, i) {
+      return function () {
+        infowindow.setContent(allAddresses[i][0]);
+        infowindow.open(map, marker);
+      }
+    })(marker, i));
+
+  }
+
+
+  // });
+
 
 
   infoWindow = new google.maps.InfoWindow();
@@ -430,6 +476,7 @@ function initMap() {
         infoWindow.open(map);
         map.setCenter(pos);
       },
+
       function () {
         handleLocationError(true, infoWindow, map.getCenter());
       }
@@ -453,4 +500,13 @@ function initMap() {
     infoWindow.open(map);
   }
 }
+
+// };
+
+
+
+
+
+
+
 
