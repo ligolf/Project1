@@ -1,5 +1,4 @@
-$(document).ready(function () {
-
+$(document).ready(function() {
   // firebase link code and API Key
   var config = {
     apiKey: 'AIzaSyAsL6rDw82BhQ0o3iK4fTFTPwj8p0Elxdw',
@@ -17,17 +16,7 @@ $(document).ready(function () {
   // console.log(database);
 
 
-  // Logs everything to console
-  // console.log('name:' + newEvent.name);
-  // console.log('address:' + newEvent.address);
- //  console.log('time:' + newEvent.time);
-  // console.log('cost:' + newEvent.cost);
-  // console.log('date:' + newEvent.date);
-  // console.log('number:' + newEvent.number);
-  // console.log('ID:' + ID);
-  // console.log('description:' + newEvent.description);
-
-  $('#create-event').on('click', function (event) {
+  $('#create-event').on('click', function(event) {
     event.preventDefault();
 
     // Grabs user input
@@ -89,7 +78,6 @@ $(document).ready(function () {
     // console.log("ID:" + ID)
     // console.log("description:" + newEvent.description);
 
-
     console.log('event successfully added');
 
     // Clears all of the text-boxes
@@ -102,7 +90,7 @@ $(document).ready(function () {
     $('#event-description-input').val('');
   });
 
-  database.ref().on('child_added', function (childSnapshot) {
+  database.ref().on('child_added', function(childSnapshot) {
     // console.log(childSnapshot.val());
 
     // Store everything into a variable.
@@ -112,12 +100,13 @@ $(document).ready(function () {
     var eventTimeOutput = childSnapshot.val().time;
     var eventdescriptionOutput = childSnapshot.val().description;
 
-
     // eventdescriptionOutput.attr('class', 'hide-column');
     var eventCostOutput = childSnapshot.val().cost;
     var eventDateOutput = childSnapshot.val().date;
 
-    var eventDatePrettyOutput = moment.unix(eventDateOutput).format('MM/DD/YYYY');
+    var eventDatePrettyOutput = moment
+      .unix(eventDateOutput)
+      .format('MM/DD/YYYY');
     var joinButton = $('<button>');
     joinButton.attr('type', 'button');
     joinButton.attr('class', 'btn btn-info');
@@ -132,7 +121,6 @@ $(document).ready(function () {
     // console.log(eventdescriptionOutput);
     // console.log(eventDatePrettyOutput);
     // console.log(eventCostOutput);
-
 
     // Create the new row
     var newRow = $('<tr>').append(
@@ -153,15 +141,14 @@ $(document).ready(function () {
     var myJSON = JSON.stringify(allAddresses);
 
     window.allAddresses;
-
   });
 
-  // moving 
+  // moving
   //   $('#googleMap').prepend(eventAddressOutput);
   // });
 
   // listener for adding attendees
-  $('#join-event').on('click', function (event) {
+  $('#join-event').on('click', function(event) {
     event.preventDefault();
 
 
@@ -239,16 +226,15 @@ $('#event-join').on('click', function(event) {
     // // console.log(postId);
     // console.log('attendee successfully added');
 
+    //Friday Night testing erase this line later
 
     // Clears all of the text-boxes
 
     $('#attendee-name-input').val('');
     $('#attendee-email-input').val('');
-
-
   });
-
 });
+
 
 
 //Create a node at firebase location to add locations as child keys
@@ -263,8 +249,8 @@ var myJSON = JSON.stringify(allAddresses);
 
 // google map time
 
-
 function initMap() {
+
 
 
 
@@ -425,11 +411,23 @@ function initMap() {
   // });
 
 
+
+  var address = '1287 san vicente blvd. los angeles, CA';
+
   // marker.addListener('click', function () {
   //   infowindow.open(map, marker);
   // });
 
+
   console.log(allAddresses);
+
+
+  geocoder.geocode({ address: address }, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      var latitude = results[0].geometry.location.lat();
+      var longitude = results[0].geometry.location.lng();
+      // alert(latitude + ", " + longitude);
+    }
 
   var map = new google.maps.Map(document.getElementById('googleMap'), {
     zoom: 10,
@@ -439,7 +437,26 @@ function initMap() {
 
   var infowindow = new google.maps.InfoWindow;
 
+
   var marker, i;
+
+
+    map = new google.maps.Map(document.getElementById('googleMap'), {
+      center: {
+        lat: 34.052234,
+        lng: -118.243685
+      },
+      zoom: 9
+    });
+    var marker = new google.maps.Marker({
+      position: dot,
+      map: map
+    });
+
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  });
 
   for (i = 0; i < allAddresses.length; i++) {
     marker = new google.maps.Marker({
@@ -460,13 +477,12 @@ function initMap() {
   // });
 
 
-
   infoWindow = new google.maps.InfoWindow();
 
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
-      function (position) {
+      function(position) {
         var pos = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
@@ -477,7 +493,8 @@ function initMap() {
         map.setCenter(pos);
       },
 
-      function () {
+      function() {
+
         handleLocationError(true, infoWindow, map.getCenter());
       }
     );
@@ -486,11 +503,7 @@ function initMap() {
     handleLocationError(false, infoWindow, map.getCenter());
   }
   // }
-  function handleLocationError(
-    browserHasGeolocation,
-    infoWindow,
-    pos
-  ) {
+  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
     infoWindow.setContent(
       browserHasGeolocation
@@ -501,12 +514,5 @@ function initMap() {
   }
 }
 
+
 // };
-
-
-
-
-
-
-
-
