@@ -1,5 +1,4 @@
-$(document).ready(function () {
-
+$(document).ready(function() {
   // firebase link code and API Key
   var config = {
     apiKey: 'AIzaSyAsL6rDw82BhQ0o3iK4fTFTPwj8p0Elxdw',
@@ -15,7 +14,7 @@ $(document).ready(function () {
   var database = firebase.database();
   // console.log(database);
 
-  $('#create-event').on('click', function (event) {
+  $('#create-event').on('click', function(event) {
     event.preventDefault();
 
     // Grabs user input
@@ -79,7 +78,6 @@ $(document).ready(function () {
     // console.log("ID:" + ID)
     // console.log("description:" + newEvent.description);
 
-
     console.log('event successfully added');
 
     // Clears all of the text-boxes
@@ -92,7 +90,7 @@ $(document).ready(function () {
     $('#event-description-input').val('');
   });
 
-  database.ref().on('child_added', function (childSnapshot) {
+  database.ref().on('child_added', function(childSnapshot) {
     // console.log(childSnapshot.val());
 
     // Store everything into a variable.
@@ -102,12 +100,13 @@ $(document).ready(function () {
     var eventTimeOutput = childSnapshot.val().time;
     var eventdescriptionOutput = childSnapshot.val().description;
 
-
     // eventdescriptionOutput.attr('class', 'hide-column');
     var eventCostOutput = childSnapshot.val().cost;
     var eventDateOutput = childSnapshot.val().date;
 
-    var eventDatePrettyOutput = moment.unix(eventDateOutput).format('MM/DD/YYYY');
+    var eventDatePrettyOutput = moment
+      .unix(eventDateOutput)
+      .format('MM/DD/YYYY');
     var joinButton = $('<button>');
     joinButton.attr('type', 'button');
     joinButton.attr('class', 'btn btn-info');
@@ -122,7 +121,6 @@ $(document).ready(function () {
     // console.log(eventdescriptionOutput);
     // console.log(eventDatePrettyOutput);
     // console.log(eventCostOutput);
-
 
     // Create the new row
     var newRow = $('<tr>').append(
@@ -142,15 +140,14 @@ $(document).ready(function () {
     allAddresses.push(eventAddressOutput);
 
     window.allAddresses;
-
   });
 
-  // moving 
+  // moving
   //   $('#googleMap').prepend(eventAddressOutput);
   // });
 
   // listener for adding attendees
-  $('#join-event').on('click', function (event) {
+  $('#join-event').on('click', function(event) {
     event.preventDefault();
 
     // Grabs user input
@@ -175,17 +172,14 @@ $(document).ready(function () {
     // // console.log(postId);
     // console.log('attendee successfully added');
 
+    //Friday Night testing erase this line later
 
     // Clears all of the text-boxes
 
     $('#attendee-name-input').val('');
     $('#attendee-email-input').val('');
-
-
   });
-
 });
-
 
 // creating an array outside of the functions to pass informstion between the functions
 var allAddresses = [];
@@ -194,11 +188,7 @@ var myJSON = JSON.stringify(allAddresses);
 
 // google map time
 
-
 function initMap() {
-
-
-
   // $((indAddresses) => {
   //   initMap = function () {
   var map, infoWindow;
@@ -207,48 +197,42 @@ function initMap() {
 
   console.log(allAddresses);
 
-  var address = "1287 san vicente blvd. los angeles, CA";
+  var address = '1287 san vicente blvd. los angeles, CA';
 
   // console.log(typeof eventAddressOutput)
 
-  geocoder.geocode({ 'address': address }, function (results, status) {
+  geocoder.geocode({ address: address }, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
       var latitude = results[0].geometry.location.lat();
       var longitude = results[0].geometry.location.lng();
       // alert(latitude + ", " + longitude);
-
     }
 
     var dot = { lat: latitude, lng: longitude };
 
-    map = new google.maps.Map(
-      document.getElementById('googleMap'),
-      {
-        center: {
-          lat: 34.052234,
-          lng: -118.243685
-        },
-        zoom: 9
-      }
-    );
+    map = new google.maps.Map(document.getElementById('googleMap'), {
+      center: {
+        lat: 34.052234,
+        lng: -118.243685
+      },
+      zoom: 9
+    });
     var marker = new google.maps.Marker({
       position: dot,
-      map: map,
-
+      map: map
     });
 
-    marker.addListener('click', function () {
+    marker.addListener('click', function() {
       infowindow.open(map, marker);
     });
   });
-
 
   infoWindow = new google.maps.InfoWindow();
 
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
-      function (position) {
+      function(position) {
         var pos = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
@@ -258,7 +242,7 @@ function initMap() {
         infoWindow.open(map);
         map.setCenter(pos);
       },
-      function () {
+      function() {
         handleLocationError(true, infoWindow, map.getCenter());
       }
     );
@@ -267,11 +251,7 @@ function initMap() {
     handleLocationError(false, infoWindow, map.getCenter());
   }
   // }
-  function handleLocationError(
-    browserHasGeolocation,
-    infoWindow,
-    pos
-  ) {
+  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
     infoWindow.setContent(
       browserHasGeolocation
@@ -281,11 +261,3 @@ function initMap() {
     infoWindow.open(map);
   }
 }
-
-
-
-
-
-
-
-
