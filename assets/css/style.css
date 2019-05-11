@@ -157,13 +157,13 @@ tbody {
     content: 'Creator Name:';
   }
   td:nth-of-type(2):before {
-    content: 'Date:';
+    content: 'Cost:';
   }
   td:nth-of-type(3):before {
-    content: 'Time:';
+    content: 'Date:';
   }
   td:nth-of-type(4):before {
-    content: 'Cost:';
+    content: 'Time:';
   }
   td:nth-of-type(5):before {
     content: 'Attendess:';
