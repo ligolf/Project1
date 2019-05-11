@@ -231,6 +231,7 @@ function initMap() {
 
     for (var i = 0; i < results.features.length; i++) {
       var coords = results.features[i].geometry.coordinates;
+      // var coords = results.features[i].address;
       var latLng = new google.maps.LatLng(coords[1], coords[0]);
       var marker = new google.maps.Marker({
         position: latLng,
