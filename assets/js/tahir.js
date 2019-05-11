@@ -140,11 +140,10 @@ $(document).ready(function () {
     $('#new-event-listings > tbody').prepend(newRow);
 
     allAddresses.push(eventAddressOutput);
-    var myJSON = JSON.stringify(allAddresses);
 
     window.allAddresses;
 
-  });
+  })
 
   // moving 
   //   $('#googleMap').prepend(eventAddressOutput);
@@ -193,32 +192,30 @@ var allAddresses = [];
 var myJSON = JSON.stringify(allAddresses);
 
 
-// console.log(allAddresses);
-
 // google map time
 
 
 function initMap() {
-
-  // $((indAddresses) => {
-  //   initMap = function () {
-  // var map, infoWindow;
-
   // var geocoder = new google.maps.Geocoder();
+  var infoWindow;
+  // var results;
 
 
+  map = new google.maps.Map(document.getElementById('googleMap'), {
+    zoom: 9,
+    center: new google.maps.LatLng(34.123, -118.1234),
+    mapTypeId: 'terrain'
+  });
 
-  // for (i = 0; i < allAddresses.length; i++) {
+  // Create a <script> tag and set the USGS URL as the source.
+  var script = document.createElement('script');
+  // This example uses a local copy of the GeoJSON stored at
+  script.src = 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp';
+  // script.src = 'https://project1-drunknscrew.firebaseio.com/address.json';
+  document.getElementsByTagName('head')[0].appendChild(script);
 
-
-
-  // var address1 = eventAddressOutput2;
-
-  // var address = "1284 sepulveda Blvd, Los Angeles, CA";
-
-  // // console.log(typeof eventAddressOutput)
-
-  // geocoder.geocode({ 'address': address }, function (results, status) {
+  console.log(script)
+  // geocoder.geocode({ 'address': results }, function (results, status) {
   //   if (status == google.maps.GeocoderStatus.OK) {
   //     var latitude = results[0].geometry.location.lat();
   //     var longitude = results[0].geometry.location.lng();
@@ -226,62 +223,22 @@ function initMap() {
 
   //   }
 
-  //   var dot = { lat: latitude, lng: longitude };
-
-  //   map = new google.maps.Map(
-  //     document.getElementById('googleMap'),
-  //     {
-  //       center: {
-  //         lat: 34.052234,
-  //         lng: -118.243685
-  //       },
-  //       zoom: 9
-  //     }
-  //   );
+  // console.log(results)
+  // Loop through the results array and place a marker for each
+  // set of coordinates.
+  window.eqfeed_callback = function (results) {
 
 
-  // var marker = new google.maps.Marker({
-  //   position: dot,
-  //   map: map,
+    for (var i = 0; i < results.features.length; i++) {
+      var coords = results.features[i].geometry.coordinates;
+      var latLng = new google.maps.LatLng(coords[1], coords[0]);
+      var marker = new google.maps.Marker({
+        position: latLng,
+        map: map
 
-  // });
-
-
-  // marker.addListener('click', function () {
-  //   infowindow.open(map, marker);
-  // });
-
-  console.log(allAddresses);
-
-  var map = new google.maps.Map(document.getElementById('googleMap'), {
-    zoom: 10,
-    center: new google.maps.LatLng(34.1123, -118.28494),
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  });
-
-  var infowindow = new google.maps.InfoWindow;
-
-  var marker, i;
-
-  for (i = 0; i < allAddresses.length; i++) {
-    marker = new google.maps.Marker({
-      position: new google.maps.LatLng(allAddresses[i][1], allAddresses[i][2]),
-      map: map
-    });
-    console.log(typeof allAddresses);
-    google.maps.event.addListener(marker, 'click', (function (marker, i) {
-      return function () {
-        infowindow.setContent(allAddresses[i][0]);
-        infowindow.open(map, marker);
-      }
-    })(marker, i));
-
+      });
+    }
   }
-
-
-  // });
-
-
 
   infoWindow = new google.maps.InfoWindow();
 
@@ -322,6 +279,7 @@ function initMap() {
     infoWindow.open(map);
   }
 }
+//   )
 // };
 
 
